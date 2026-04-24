@@ -17,7 +17,7 @@ const Sidebar = () => {
            </Link>
         </div>
     </div>
-        <div>
+        <div className='flex-1 md:py-20 md:px-6 p-2 bg-white dark:bg-zinc-950'>
           <Outlet/>
         </div>
     </div>
