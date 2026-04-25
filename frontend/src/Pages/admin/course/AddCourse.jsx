@@ -14,6 +14,16 @@ const AddCourse = () => {
           difficulty level.
         </p>
       </div>
+      <div className="space-y-4">
+        <div className="flex-col flex w-fit">
+          <label>Title</label>
+          <input 
+          className=""
+          type="text"
+          name="courseTitle"
+          placeholder="Your Course Name" />
+        </div>
+      </div>
     </div>
   );
 };
