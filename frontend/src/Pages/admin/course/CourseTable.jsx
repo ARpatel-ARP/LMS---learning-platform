@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from '@/components/ui/button'
+import { useNavigate } from 'react-router-dom'
 
 const invoices = [
   {
@@ -57,9 +58,10 @@ const invoices = [
 ]
 
 const CourseTable = () => {
+  const navigate = useNavigate()
   return <>
     <div>
-      <Button className="mb-10 mt-5">CourseTable</Button>
+      <Button onClick={() => navigate(`create`)} className="mb-10 mt-5">Create New Course</Button>
     </div>
     <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>

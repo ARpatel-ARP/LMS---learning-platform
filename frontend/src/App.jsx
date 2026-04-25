@@ -13,6 +13,7 @@ import Sidebar from "./Pages/admin/Sidebar.jsx"
 import Dashboard from './Pages/admin/Dashboard'
 import Course from './Pages/student/Course'
 import CourseTable from './Pages/admin/course/CourseTable'
+import AddCourse from './Pages/admin/course/AddCourse'
 
 const appRouter = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const appRouter = createBrowserRouter([
           {
             path:"course",
             element:<CourseTable/>
+          },
+          {
+            path:"course/create",
+            element:<AddCourse/>
           }
         ]
       }
