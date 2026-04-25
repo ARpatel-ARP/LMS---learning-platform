@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
+import { PlusCircle } from 'lucide-react'
 
 const invoices = [
   {
@@ -61,7 +62,9 @@ const CourseTable = () => {
   const navigate = useNavigate()
   return <>
     <div>
-      <Button onClick={() => navigate(`create`)} className="mb-10 mt-5">Create New Course</Button>
+      <Button onClick={() => navigate(`create`)} className="mb-10 mt-5">Create New Course
+        <PlusCircle size={22} />
+      </Button>
     </div>
     <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>
