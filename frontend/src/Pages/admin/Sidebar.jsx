@@ -7,11 +7,11 @@ const Sidebar = () => {
    <div className='flex'>
   <div className='hidden lg:block shrink-0 border-r border-gray-300 dark:border-zinc-800 bg-[#f0f0f0] dark:bg-zinc-950 p-3 pr-15 h-screen'>
     <div className="space-y-4 mt-10 p-2 pt-10">
-      <Link to="/admin/dashboard" className='flex items-center gap-2 whitespace-nowrap'>
+      <Link to="dashboard" className='flex items-center gap-2 whitespace-nowrap'>
         <ChartNoAxesColumn size={22} />
         <h1>Dashboard</h1>
       </Link>
-      <Link to="/admin/course" className='flex items-center gap-2 whitespace-nowrap'>
+      <Link to="course" className='flex items-center gap-2 whitespace-nowrap'>
         <SquareLibrary size={22} />
         <h1>Courses</h1>
       </Link>
