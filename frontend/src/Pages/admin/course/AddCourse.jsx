@@ -18,8 +18,8 @@ const AddCourse = () => {
 
   const navigate = useNavigate();
   const isLoading = true;
-  
-  const createCourseHandler = async () => 
+
+  const createCourseHandler = async () => {
   }
   const  getSelectedCategory = async (value) => {
     
