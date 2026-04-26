@@ -46,10 +46,10 @@ const AddCourse = () => {
               <SelectGroup>
                 <SelectLabel className="">Category</SelectLabel>
                 <SelectItem value="apple">Next.js</SelectItem>
-                <SelectItem value="banana">Banana</SelectItem>
-                <SelectItem value="blueberry">Blueberry</SelectItem>
-                <SelectItem value="grapes">Grapes</SelectItem>
-                <SelectItem value="pineapple">Pineapple</SelectItem>
+                <SelectItem value="banana">AI-ML</SelectItem>
+                <SelectItem value="blueberry">Cloud Computing</SelectItem>
+                <SelectItem value="grapes">React.js</SelectItem>
+                <SelectItem value="pineapple">Express.js</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
