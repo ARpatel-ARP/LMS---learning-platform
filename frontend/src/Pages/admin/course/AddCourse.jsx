@@ -7,7 +7,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 const AddCourse = () => {
   return (
@@ -23,30 +23,34 @@ const AddCourse = () => {
           difficulty level.
         </p>
       </div>
-      <div className="space-y-4">
-        <div className="flex-col flex w-fit">
+      <div className="">
+        <div className="flex-col flex w-fit py-3">
           <label>Title</label>
-          <input 
-          className=""
-          type="text"
-          name="courseTitle"
-          placeholder="Your Course Name" />
+          <input
+            className="pt-2"
+            type="text"
+            name="courseTitle"
+            placeholder="Your Course Name"
+          />
         </div>
-        <Select>
-      <SelectTrigger className="w-full max-w-48">
-        <SelectValue placeholder="Select a fruit" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+        <div className="py-3"> 
+          <label>Category</label>
+          <Select >
+            <SelectTrigger className="w-full max-w-48">
+              <SelectValue placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel className="pt-15">Fruits</SelectLabel>
+                <SelectItem value="apple">Apple</SelectItem>
+                <SelectItem value="banana">Banana</SelectItem>
+                <SelectItem value="blueberry">Blueberry</SelectItem>
+                <SelectItem value="grapes">Grapes</SelectItem>
+                <SelectItem value="pineapple">Pineapple</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
     </div>
   );
