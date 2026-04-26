@@ -10,9 +10,14 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 
 const AddCourse = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const isLoading = true;
+  const createCourseHandler = async () => {
+    alert("working")
+  }
   return (
     <div className="flex-1 mx-10 ">
       <div className="mb-4">
@@ -36,9 +41,9 @@ const AddCourse = () => {
             placeholder="Your Course Name"
           />
         </div>
-        <div className="py-3"> 
+        <div className="py-3">
           <label className="block mb-2">Category</label>
-          <Select >
+          <Select>
             <SelectTrigger className="w-full max-w-48">
               <SelectValue placeholder="Select a Category" />
             </SelectTrigger>
@@ -55,8 +60,17 @@ const AddCourse = () => {
           </Select>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" onClick={()=> navigate(`/admin/course`)}>Back</Button>
-          <Button>Create</Button>
+          <Button variant="outline" onClick={() => navigate("/admin/course")}>
+            Back
+          </Button>
+          <Button disabled={isLoading} onClick={createCourseHandler}>{
+            isLoading ? (
+                    <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+                    Please wait
+                    </>
+                   )  : "Create"
+            }</Button>
         </div>
       </div>
     </div>
