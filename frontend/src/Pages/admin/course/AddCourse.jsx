@@ -8,8 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const AddCourse = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex-1 mx-10 ">
       <div className="mb-4">
@@ -34,15 +37,15 @@ const AddCourse = () => {
           />
         </div>
         <div className="py-3"> 
-          <label>Category</label>
+          <label className="block mb-2">Category</label>
           <Select >
             <SelectTrigger className="w-full max-w-48">
-              <SelectValue placeholder="Select a fruit" />
+              <SelectValue placeholder="Select a Category" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel className="pt-15">Fruits</SelectLabel>
-                <SelectItem value="apple">Apple</SelectItem>
+                <SelectLabel className="">Category</SelectLabel>
+                <SelectItem value="apple">Next.js</SelectItem>
                 <SelectItem value="banana">Banana</SelectItem>
                 <SelectItem value="blueberry">Blueberry</SelectItem>
                 <SelectItem value="grapes">Grapes</SelectItem>
@@ -50,6 +53,10 @@ const AddCourse = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={()=> navigate(`/admin/course`)}>Back</Button>
+          <Button>Create</Button>
         </div>
       </div>
     </div>
