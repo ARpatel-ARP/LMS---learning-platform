@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -13,10 +13,16 @@ import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 
 const AddCourse = () => {
+  const [courseTitle, setCourseTitle] = useState("")
+  const [category, setCategory] = useState("")
+
   const navigate = useNavigate();
   const isLoading = true;
-  const createCourseHandler = async () => {
-    alert("working")
+  
+  const createCourseHandler = async () => 
+  }
+  const  getSelectedCategory = async (value) => {
+    
   }
   return (
     <div className="flex-1 mx-10 ">
@@ -43,7 +49,7 @@ const AddCourse = () => {
         </div>
         <div className="py-3">
           <label className="block mb-2">Category</label>
-          <Select>
+          <Select onValueChange={getSelectedCategory}>
             <SelectTrigger className="w-full max-w-48">
               <SelectValue placeholder="Select a Category" />
             </SelectTrigger>
