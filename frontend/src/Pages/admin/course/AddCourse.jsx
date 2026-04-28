@@ -19,11 +19,11 @@ const AddCourse = () => {
   const navigate = useNavigate();
   const isLoading = false;
 
-  const createCourseHandler = async () => {
-    console.log(courseTitle, category);
-  };
   const getSelectedCategory = async (value) => {
     setCategory(value);
+  };
+  const createCourseHandler = async () => {
+    
   };
   return (
     <div className="flex-1 mx-10 ">
