@@ -17,7 +17,7 @@ const AddCourse = () => {
   const [category, setCategory] = useState("")
 
   const navigate = useNavigate();
-  const isLoading = true;
+  const isLoading = false;
 
   const createCourseHandler = async () => {
   }
