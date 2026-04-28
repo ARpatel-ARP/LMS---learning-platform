@@ -13,19 +13,18 @@ import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 
 const AddCourse = () => {
-  const [courseTitle, setCourseTitle] = useState("")
-  const [category, setCategory] = useState("")
+  const [courseTitle, setCourseTitle] = useState("");
+  const [category, setCategory] = useState("");
 
   const navigate = useNavigate();
   const isLoading = false;
 
   const createCourseHandler = async () => {
     console.log(courseTitle, category);
-    
-  }
-  const  getSelectedCategory = async (value) => {
-    setCategory(value)
-  }
+  };
+  const getSelectedCategory = async (value) => {
+    setCategory(value);
+  };
   return (
     <div className="flex-1 mx-10 ">
       <div className="mb-4">
@@ -47,7 +46,7 @@ const AddCourse = () => {
             type="text"
             name="courseTitle"
             value={courseTitle}
-            onChange={(e)=> setCourseTitle(e.target.value)}
+            onChange={(e) => setCourseTitle(e.target.value)}
             placeholder="Your Course Name"
           />
         </div>
@@ -60,11 +59,11 @@ const AddCourse = () => {
             <SelectContent>
               <SelectGroup>
                 <SelectLabel className="">Category</SelectLabel>
-                <SelectItem value="apple">Next.js</SelectItem>
-                <SelectItem value="banana">AI-ML</SelectItem>
-                <SelectItem value="blueberry">Cloud Computing</SelectItem>
-                <SelectItem value="grapes">React.js</SelectItem>
-                <SelectItem value="pineapple">Express.js</SelectItem>
+                <SelectItem value="Next.js">Next.js</SelectItem>
+                <SelectItem value="AI-ML">AI-ML</SelectItem>
+                <SelectItem value="Cloud Computing">Cloud Computing</SelectItem>
+                <SelectItem value="React.js">React.js</SelectItem>
+                <SelectItem value="Express.js">Express.js</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -73,14 +72,16 @@ const AddCourse = () => {
           <Button variant="outline" onClick={() => navigate("/admin/course")}>
             Back
           </Button>
-          <Button disabled={isLoading} onClick={createCourseHandler}>{
-            isLoading ? (
-                    <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
-                    Please wait
-                    </>
-                   )  : "Create"
-            }</Button>
+          <Button disabled={isLoading} onClick={createCourseHandler}>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              "Create"
+            )}
+          </Button>
         </div>
       </div>
     </div>
