@@ -20,9 +20,11 @@ const AddCourse = () => {
   const isLoading = false;
 
   const createCourseHandler = async () => {
+    console.log(courseTitle, category);
+    
   }
   const  getSelectedCategory = async (value) => {
-    
+    setCategory(value)
   }
   return (
     <div className="flex-1 mx-10 ">
@@ -41,9 +43,11 @@ const AddCourse = () => {
         <div className="flex-col flex w-fit py-3">
           <label>Title</label>
           <input
-            className="pt-2"
+            className="pt-2 border border-transparent rounded w-full px-2 outline-none focus:border-gray-500"
             type="text"
             name="courseTitle"
+            value={courseTitle}
+            onChange={(e)=> setCourseTitle(e.target.value)}
             placeholder="Your Course Name"
           />
         </div>
