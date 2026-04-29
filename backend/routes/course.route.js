@@ -6,5 +6,5 @@ import { createCourse } from "../controllers/courseController.js"
 
 const router = express.Router()
 
-router.route('/').post(isAuthenticated, createCourse)
+router.route('/create').post(isAuthenticated, createCourse)
 export default router
