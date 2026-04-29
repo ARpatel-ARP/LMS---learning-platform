@@ -31,7 +31,7 @@ const AddCourse = () => {
     if (isSuccess) {
       toast.success(data?.message || "Course created" )
     }
-  }
+  },[isSuccess, error]
   )
   return (
     <div className="flex-1 mx-10 ">
