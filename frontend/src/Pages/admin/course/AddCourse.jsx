@@ -11,30 +11,49 @@ import {
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner"; 
 import { useCreateCourseMutation } from "@/features/api/courseApi";
 
 const AddCourse = () => {
   const [courseTitle, setCourseTitle] = useState("");
   const [category, setCategory] = useState("");
 
-  const [createCourse, {data, isLoading, error, isSuccess}] = useCreateCourseMutation()
+  const [createCourse, { data, isLoading, error, isSuccess }] =
+    useCreateCourseMutation();
 
   const navigate = useNavigate();
 
-  const getSelectedCategory = async (value) => {
+  const getSelectedCategory = (value) => {
     setCategory(value);
   };
+
   const createCourseHandler = async () => {
-    await createCourse({courseTitle, category})
+    if (!courseTitle.trim() || !category) {
+      toast.error("Please enter a course title and select a category.");
+      return;
+    }
+  
+    try {
+      await createCourse({ courseTitle, category }).unwrap();
+    } catch (err) {
+      console.error("Create course failed:", err);
+    }
   };
+
   useEffect(() => {
     if (isSuccess) {
-      toast.success(data?.message || "Course created" )
+      toast.success(data?.message || "Course created");
+      navigate("/admin/course"); // 
     }
-  },[isSuccess, error]
-  )
+    if (error) {
+      const msg =
+        error?.data?.message || error?.error || "Failed to create course.";
+      toast.error(msg);
+    }
+  }, [isSuccess, error]);
+
   return (
-    <div className="flex-1 mx-10 ">
+    <div className="flex-1 mx-10">
       <div className="mb-4">
         <h1 className="font-bold text-xl">Lets add Course</h1>
         <p className="text-sm py-3">
@@ -46,7 +65,7 @@ const AddCourse = () => {
           difficulty level.
         </p>
       </div>
-      <div className="">
+      <div>
         <div className="flex-col flex w-fit py-3">
           <label>Title</label>
           <input
@@ -66,7 +85,7 @@ const AddCourse = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel className="">Category</SelectLabel>
+                <SelectLabel>Category</SelectLabel>
                 <SelectItem value="Next.js">Next.js</SelectItem>
                 <SelectItem value="AI-ML">AI-ML</SelectItem>
                 <SelectItem value="Cloud Computing">Cloud Computing</SelectItem>
