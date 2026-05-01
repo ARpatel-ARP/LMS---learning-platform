@@ -17,7 +17,7 @@ export const courseApi = createApi({
           body:{courseTitle, category}
         })  
      }),
-     getCreatorCourse: builder.mutation({
+     getCreatorCourse: builder.query({
         query: () => ({
           url:"/create",
           method:"GET"
@@ -25,5 +25,5 @@ export const courseApi = createApi({
      }) 
     })
 })
-export const {useCreateCourseMutation, useGetCreatorCourseMutation} = courseApi
+export const {useCreateCourseMutation, useGetCreatorCourseQuery} = courseApi
     
