@@ -16,8 +16,14 @@ export const courseApi = createApi({
           method:"POST",
           body:{courseTitle, category}
         })  
+     }),
+     getCreatorCourse: builder.mutation({
+        query: () => ({
+          url:"/create",
+          method:"GET"
+        })  
      }) 
     })
 })
-export const {useCreateCourseMutation} = courseApi
+export const {useCreateCourseMutation, useGetCreatorCourseMutation} = courseApi
     
