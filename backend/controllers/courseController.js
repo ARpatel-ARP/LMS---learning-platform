@@ -27,7 +27,7 @@ export const createCourse = async (req, res) => {
 export const getCreatorCourse = async (req, res) => {
     try {
         const userId = req.id
-        const courses = await Courses.find({creator:userId})
+        const courses = await Course.find({creator:userId})
         if (!courses) {
             return res.status(404).json({
                 course:[],
