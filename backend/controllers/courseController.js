@@ -24,9 +24,10 @@ export const createCourse = async (req, res) => {
     }
 }
 
-export const getAllAdminCourse = async (req, res) => {
+export const getCreatorCourse = async (req, res) => {
     try {
-        
+        const userId = req.id
+        const courses = await Courses.find({creator})
     } catch (error) {
         
     }
