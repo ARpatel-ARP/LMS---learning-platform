@@ -23,3 +23,11 @@ export const createCourse = async (req, res) => {
         })
     }
 }
+
+export const getAllAdminCourse = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
