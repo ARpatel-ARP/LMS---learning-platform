@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import { PlusCircle } from 'lucide-react'
+import { useGetCreatorCourseQuery } from '@/features/api/courseApi'
 
 const invoices = [
   {
@@ -59,7 +60,12 @@ const invoices = [
 ]
 
 const CourseTable = () => {
+  const {data, isLoading} = useGetCreatorCourseQuery()
   const navigate = useNavigate()
+// no data is consoling fix in next turn
+  if (isLoading) return <h1>Loading...</h1>
+  console.log("data ->", data);
+  
   return <>
     <div>
       <Button onClick={() => navigate(`create`)} className="mb-10 mt-5">Create New Course
