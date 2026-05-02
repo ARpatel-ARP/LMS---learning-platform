@@ -85,9 +85,9 @@ const CourseTable = () => {
       <TableBody>
         {data.courses.map((course) => (
           <TableRow key={course._id}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
+            <TableCell className="font-medium">{course?.coursePrice || "NA"}</TableCell>
+            <TableCell>{course.isPublished ? "Published" : "Draft"}</TableCell>
+            <TableCell>{course.courseTitle}</TableCell>
             <TableCell className="text-right">{invoice.totalAmount}</TableCell>
           </TableRow>
         ))}
