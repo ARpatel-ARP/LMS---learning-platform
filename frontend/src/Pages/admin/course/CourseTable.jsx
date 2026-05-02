@@ -64,8 +64,8 @@ const CourseTable = () => {
   const navigate = useNavigate()
 // no data is consoling fix in next turn
   if (isLoading) return <h1>Loading...</h1>
+  const courses = data?.courses || []
   console.log("data ->", data);
-  
   return <>
     <div>
       <Button onClick={() => navigate(`create`)} className="mb-10 mt-5">Create New Course
