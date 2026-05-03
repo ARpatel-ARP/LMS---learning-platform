@@ -1,4 +1,4 @@
-import { Course } from "../models/course.model.js"
+import  {Course}  from "../models/course.model.js"
 
 export const createCourse = async (req, res) => {
     try {
@@ -33,10 +33,10 @@ export const getCreatorCourse = async (req, res) => {
                 course:[],
                 message:"Course not found"
             })
-            return res.status(200).json({
-                courses,
-            })
         }
+        return res.status(200).json({
+            courses,
+        })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
