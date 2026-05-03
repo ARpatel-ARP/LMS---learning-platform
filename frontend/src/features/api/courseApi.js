@@ -19,7 +19,7 @@ export const courseApi = createApi({
      }),
      getCreatorCourse: builder.query({
         query: () => ({
-          url:"/create",
+          url:"/",
           method:"GET"
         })  
      }) 
