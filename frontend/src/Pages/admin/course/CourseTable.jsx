@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
-import { Edit, Edit2, PlusCircle } from 'lucide-react'
+import { Badge, Edit, Edit2, FileBadge2Icon, PlusCircle } from 'lucide-react'
 import { useGetCreatorCourseQuery } from '@/features/api/courseApi'
 
 const invoices = [
@@ -86,7 +86,7 @@ const CourseTable = () => {
         {courses.map((course) => (
           <TableRow key={course._id}>
             <TableCell className="font-medium">{course?.coursePrice || "NA"}</TableCell>
-            <TableCell>{course.isPublished ? "Published" : "Draft"}</TableCell>
+            <TableCell><FileBadge2Icon>{course.isPublished ? "Published" : "Draft"}</FileBadge2Icon></TableCell>
             <TableCell>{course.courseTitle}</TableCell>
             <TableCell className="text-right"><Button><Edit2/></Button></TableCell>
           </TableRow>
