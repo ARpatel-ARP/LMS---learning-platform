@@ -4,6 +4,6 @@ import isAuthenticated from "../middlewares/isAuthenticated.js"
 
 const router = express.Router()
 
-router.route('/').post(isAuthenticated, createCourse)
+router.route('/create').post(isAuthenticated, createCourse)
 router.route("/").get(isAuthenticated, getCreatorCourse)
 export default router

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
-import { Badge, Edit, Edit2, FileBadge2Icon, PlusCircle } from 'lucide-react'
+import { Badge, Edit, Edit2, PlusCircle } from 'lucide-react'
 import { useGetCreatorCourseQuery } from '@/features/api/courseApi'
 
 const invoices = [
@@ -73,7 +73,7 @@ const CourseTable = () => {
       </Button>
     </div>
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableCaption>A list of your recent Courses</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-25">Price</TableHead>
@@ -86,18 +86,12 @@ const CourseTable = () => {
         {courses.map((course) => (
           <TableRow key={course._id}>
             <TableCell className="font-medium">{course?.coursePrice || "NA"}</TableCell>
-            <TableCell><FileBadge2Icon>{course.isPublished ? "Published" : "Draft"}</FileBadge2Icon></TableCell>
+            <TableCell><Button>{course.isPublished ? "Published" : "Draft"}</Button></TableCell>
             <TableCell>{course.courseTitle}</TableCell>
-            <TableCell className="text-right"><Button><Edit2/></Button></TableCell>
+            <TableCell className="text-right"><Button variant='ghost'><Edit2/></Button></TableCell>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
     </Table>
   </>
 }
