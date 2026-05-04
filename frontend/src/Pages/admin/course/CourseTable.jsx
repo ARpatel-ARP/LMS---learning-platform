@@ -94,6 +94,7 @@ const CourseTable = () => {
               </TableCell>
               <TableCell>{course.courseTitle}</TableCell>
               <TableCell className="text-right">
+                <Link to={`/admin/course/${course._id}`}></Link>
                 <Button
                   variant="ghost"
                 >
