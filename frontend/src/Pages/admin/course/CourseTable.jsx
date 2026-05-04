@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Badge, Edit, Edit2, PlusCircle } from "lucide-react";
 import { useGetCreatorCourseQuery } from "@/features/api/courseApi";
 
@@ -94,12 +94,13 @@ const CourseTable = () => {
               </TableCell>
               <TableCell>{course.courseTitle}</TableCell>
               <TableCell className="text-right">
+                <Link to={`/admin/course/${course._id}`}>
                 <Button
                   variant="ghost"
-                >
-                <Link to={`/admin/course/${course._id}`}></Link>
+                  >
                   <Edit2 />
                 </Button>
+                  </Link>
               </TableCell>
             </TableRow>
           ))}
