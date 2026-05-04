@@ -14,5 +14,4 @@ const EditCourse = () => {
     </div>
   );
 }
-
 export default EditCourse;
