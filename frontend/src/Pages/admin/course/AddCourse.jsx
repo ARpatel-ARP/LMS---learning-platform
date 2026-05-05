@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner"; 
 import { useCreateCourseMutation } from "@/features/api/courseApi";
+import { Input } from "@/components/ui/input";
 
 const AddCourse = () => {
   const [courseTitle, setCourseTitle] = useState("");
@@ -68,7 +69,7 @@ const AddCourse = () => {
       <div>
         <div className="flex-col flex w-fit py-3">
           <label>Title</label>
-          <input
+          <Input
             className="pt-2 border border-transparent rounded w-full px-2 outline-none focus:border-gray-500"
             type="text"
             name="courseTitle"
