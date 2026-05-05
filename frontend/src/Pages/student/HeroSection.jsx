@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import React from 'react';
 
 const HeroSection = () => {
@@ -8,7 +9,7 @@ const HeroSection = () => {
         <h1 className='text-white md:text-3xl text-2xl font-bold mt-10'>Find the Best Courses For You</h1>
         <p className='text-gray-200 md:text-lg text-sm dark:text-gray-400 mt-5'>Discover, Learn, and Upskill with our wide range of courses</p>
         <form className='flex items-center border-none pl-5 rounded-full shadow-lg overflow-hidden max-w-xl mx-auto md:mb-6 mt-5 bg-white'>
-          <input
+          <Input
             type="text"
             placeholder="Search courses..."
             className="flex-1 bg-transparent text-black placeholder-gray-400 outline-none focus:outline-none border-none px-2 text-sm"

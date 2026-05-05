@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
-import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import React from 'react';
 
 const CourseTab = () => {
@@ -24,6 +26,19 @@ const CourseTab = () => {
                 <Button>Remove course</Button>
             </div>
         </CardHeader>
+        <CardContent>
+            <div className="space-y-4 mt-5">
+                <div>
+                    <Label>
+                        <Input
+                        type='text'
+                        name="Course Title"
+                        placeholder="Example: Fullstack Developer"
+                        />
+                    </Label>
+                </div>
+            </div>
+        </CardContent>
     </Card>
    </>
   );
