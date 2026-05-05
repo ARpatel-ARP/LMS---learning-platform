@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Card } from '@hugeicons/core-free-icons';
 import React from 'react';
@@ -11,6 +12,11 @@ const CourseTab = () => {
                 <CardDescription>
                     Make changes to your courses here. Click save when you are done 
                 </CardDescription>
+            </div>
+            <div>
+                <Button>
+                    
+                </Button>
             </div>
         </CardHeader>
     </Card>
