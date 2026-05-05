@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Card } from '@hugeicons/core-free-icons';
+import { Card } from '@/components/ui/card';
 import React from 'react';
 
 const CourseTab = () => {
     const isPublished = true
   return (
+   <>
     <Card>
         <CardHeader>
             <div>
@@ -24,6 +25,7 @@ const CourseTab = () => {
             </div>
         </CardHeader>
     </Card>
+   </>
   );
 }
 
