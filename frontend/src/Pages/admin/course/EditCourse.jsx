@@ -12,6 +12,7 @@ const EditCourse = () => {
       </Link>
       </h1>
     </div>
+    <CourseTab/>
     </div>
   );
 }
