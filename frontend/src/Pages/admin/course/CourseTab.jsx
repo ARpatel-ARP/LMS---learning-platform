@@ -4,6 +4,7 @@ import { Card } from '@hugeicons/core-free-icons';
 import React from 'react';
 
 const CourseTab = () => {
+    const isPublished = true
   return (
     <Card>
         <CardHeader>
@@ -14,8 +15,11 @@ const CourseTab = () => {
                 </CardDescription>
             </div>
             <div>
-                <Button>
-                    
+                <Button variant='outline'>
+                    {
+                        isPublished ? "Unpublished" : "Published"
+                    }
+
                 </Button>
             </div>
         </CardHeader>
