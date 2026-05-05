@@ -8,20 +8,20 @@ const CourseTab = () => {
   return (
    <>
     <Card>
-        <CardHeader>
+        <CardHeader className='flex justify-between flex-row'>
             <div>
                 <CardTitle> Basic course information</CardTitle>
                 <CardDescription>
                     Make changes to your courses here. Click save when you are done 
                 </CardDescription>
             </div>
-            <div>
+            <div className='flex gap-2'>
                 <Button variant='outline'>
                     {
                         isPublished ? "Unpublished" : "Published"
                     }
-
                 </Button>
+                <Button>Remove course</Button>
             </div>
         </CardHeader>
     </Card>
