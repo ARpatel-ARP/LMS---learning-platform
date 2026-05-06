@@ -90,6 +90,7 @@ const Login = () => {
           <TabsTrigger value="Sign up">Sign up</TabsTrigger>
           <TabsTrigger value="Login">Login</TabsTrigger>
         </TabsList>
+             <form onSubmit={(e) => { e.preventDefault(); handleRegistration("signup"); }}>
         <TabsContent value="Sign up">
           <Card className="w-full max-w-sm">
             <CardHeader>
@@ -97,7 +98,6 @@ const Login = () => {
               <CardDescription>Enter the details below</CardDescription>
             </CardHeader>
             <CardContent>
-             <form onSubmit={(e) => { e.preventDefault(); handleRegistration("signup"); }}>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Full name</Label>
