@@ -137,7 +137,6 @@ const Login = () => {
                     />
                   </div>
                 </div>
-              </form>
             </CardContent>
             <CardFooter className="flex-col gap-2">
               <Button
@@ -145,7 +144,7 @@ const Login = () => {
                 onClick={() => handleRegistration("signup")}
                 type="submit"
                 className="w-full"
-              >
+                >
                 {registerLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 animate-spin w-4" /> Loading
@@ -158,6 +157,7 @@ const Login = () => {
             </CardFooter>
           </Card>
         </TabsContent>
+                </form>
         <TabsContent value="Login">
           <Card className="w-full max-w-sm">
             <CardHeader>
