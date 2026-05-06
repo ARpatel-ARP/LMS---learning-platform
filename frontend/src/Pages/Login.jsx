@@ -158,6 +158,7 @@ const Login = () => {
           </Card>
         </TabsContent>
                 </form>
+             <form onSubmit={(e) => { e.preventDefault(); handleRegistration("login"); }}>
         <TabsContent value="Login">
           <Card className="w-full max-w-sm">
             <CardHeader>
@@ -167,7 +168,6 @@ const Login = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-             <form onSubmit={(e) => { e.preventDefault(); handleRegistration("login"); }}>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
@@ -201,7 +201,6 @@ const Login = () => {
                     />
                   </div>
                 </div>
-              </form>
             </CardContent>
             <CardFooter className="flex-col gap-2">
               <Button
@@ -225,6 +224,7 @@ const Login = () => {
             </CardFooter>
           </Card>
         </TabsContent>
+              </form>
       </Tabs>
     </div>
   );
