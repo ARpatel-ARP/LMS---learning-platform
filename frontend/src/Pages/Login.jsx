@@ -155,9 +155,9 @@ const Login = () => {
                 )}
               </Button>
             </CardFooter>
+                </form>
           </Card>
         </TabsContent>
-                </form>
         <TabsContent value="Login">
           <Card className="w-full max-w-sm">
             <CardHeader>
