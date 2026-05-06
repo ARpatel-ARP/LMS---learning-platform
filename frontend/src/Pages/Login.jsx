@@ -97,7 +97,7 @@ const Login = () => {
               <CardDescription>Enter the details below</CardDescription>
             </CardHeader>
             <CardContent>
-              <form>
+             <form onSubmit={(e) => { e.preventDefault(); handleRegistration("signup"); }}>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Full name</Label>
@@ -167,7 +167,7 @@ const Login = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form>
+             <form onSubmit={(e) => { e.preventDefault(); handleRegistration("login"); }}>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
