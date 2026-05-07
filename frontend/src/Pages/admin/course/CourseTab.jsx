@@ -37,10 +37,10 @@ const CourseTab = () => {
                         />
                 </div>
                 <div>
-                    <Label className="my-2 mx-1">Course Title</Label>
+                    <Label className="my-2 mx-1">Sub-Title</Label>
                         <Input
                         type='text'
-                        name="Course Title"
+                        name="SubTitle"
                         placeholder="Example: Fullstack Developer"
                         />
                 </div>
