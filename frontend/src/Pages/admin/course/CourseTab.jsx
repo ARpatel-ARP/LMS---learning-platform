@@ -41,8 +41,12 @@ const CourseTab = () => {
                         <Input
                         type='text'
                         name="SubTitle"
-                        placeholder="Example: Fullstack Developer"
+                        placeholder="Example: Become an advanced developer from zero basics"
                         />
+                </div>
+                <div>
+                    <Label className="my-2 mx-1">Description</Label>
+                    <RichTextEditor/>
                 </div>
             </div>
         </CardContent>
