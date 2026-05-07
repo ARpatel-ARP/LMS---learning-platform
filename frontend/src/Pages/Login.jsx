@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Toaster } from "@/components/ui/sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,7 +51,7 @@ const Login = () => {
     },
   ] = useLoginUserMutation();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const changeHandler = (e, type) => {
     const { name, value } = e.target;
@@ -69,20 +69,26 @@ const Login = () => {
   };
   useEffect(() => {
     if (registerIsSuccess && registerData) {
-      toast.success(registerData.message || "Signup Successful")
+      toast.success(registerData.message || "Signup Successful");
     }
     if (registerError) {
-      toast.error(registerError.data?.message || "Signup failed") 
+      toast.error(registerError.data?.message || "Signup failed");
     }
     if (loginIsSuccess && loginData) {
-      toast.success(loginData.message || "Login Successful")
-      navigate("dashboard")
+      toast.success(loginData.message || "Login Successful");
+      navigate("dashboard");
     }
     if (loginError) {
-      toast.error(loginError.data?.message || "Login failed")  
+      toast.error(loginError.data?.message || "Login failed");
     }
-  },
-    [loginLoading, registerLoading, loginData, registerData, loginError, registerError]);
+  }, [
+    loginLoading,
+    registerLoading,
+    loginData,
+    registerData,
+    loginError,
+    registerError,
+  ]);
   return (
     <div className="flex items-center w-full justify-center mt-25">
       <Tabs defaultValue="Sign up" className="w-100 shadow-2xl rounded-2xl p-2">
@@ -90,14 +96,19 @@ const Login = () => {
           <TabsTrigger value="Sign up">Sign up</TabsTrigger>
           <TabsTrigger value="Login">Login</TabsTrigger>
         </TabsList>
-             <form onSubmit={(e) => { e.preventDefault(); handleRegistration("signup"); }}>
-        <TabsContent value="Sign up">
-          <Card className="w-full max-w-sm">
-            <CardHeader>
-              <CardTitle>Create a new Account</CardTitle>
-              <CardDescription>Enter the details below</CardDescription>
-            </CardHeader>
-            <CardContent>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleRegistration("signup");
+          }}
+        >
+          <TabsContent value="Sign up">
+            <Card className="w-full max-w-sm">
+              <CardHeader>
+                <CardTitle>Create a new Account</CardTitle>
+                <CardDescription>Enter the details below</CardDescription>
+              </CardHeader>
+              <CardContent>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Full name</Label>
@@ -137,37 +148,42 @@ const Login = () => {
                     />
                   </div>
                 </div>
-            </CardContent>
-            <CardFooter className="flex-col gap-2">
-              <Button
-                disabled={registerLoading}
-                onClick={() => handleRegistration("signup")}
-                type="submit"
-                className="w-full"
+              </CardContent>
+              <CardFooter className="flex-col gap-2">
+                <Button
+                  disabled={registerLoading}
+                  onClick={() => handleRegistration("signup")}
+                  type="submit"
+                  className="w-full"
                 >
-                {registerLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 animate-spin w-4" /> Loading
-                    please wait...
-                  </>
-                ) : (
-                  "Signup"
-                )}
-              </Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-                </form>
-             <form onSubmit={(e) => { e.preventDefault(); handleRegistration("login"); }}>
-        <TabsContent value="Login">
-          <Card className="w-full max-w-sm">
-            <CardHeader>
-              <CardTitle>Login to your account</CardTitle>
-              <CardDescription>
-                Enter your email below to login to your account
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
+                  {registerLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 animate-spin w-4" /> Loading
+                      please wait...
+                    </>
+                  ) : (
+                    "Signup"
+                  )}
+                </Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+        </form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleRegistration("login");
+          }}
+        >
+          <TabsContent value="Login">
+            <Card className="w-full max-w-sm">
+              <CardHeader>
+                <CardTitle>Login to your account</CardTitle>
+                <CardDescription>
+                  Enter your email below to login to your account
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
@@ -201,30 +217,30 @@ const Login = () => {
                     />
                   </div>
                 </div>
-            </CardContent>
-            <CardFooter className="flex-col gap-2">
-              <Button
-                disabled={loginLoading}
-                onClick={() => handleRegistration("login")}
-                type="submit"
-                className="w-full"
-              >
-                {loginLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loading
-                    please wait...
-                  </>
-                ) : (
-                  "Login"
-                )}
-              </Button>
-              <Button variant="outline" className="w-full">
-                Login with Google
-              </Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-              </form>
+              </CardContent>
+              <CardFooter className="flex-col gap-2">
+                <Button
+                  disabled={loginLoading}
+                  onClick={() => handleRegistration("login")}
+                  type="submit"
+                  className="w-full"
+                >
+                  {loginLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loading
+                      please wait...
+                    </>
+                  ) : (
+                    "Login"
+                  )}
+                </Button>
+                <Button variant="outline" className="w-full">
+                  Login with Google
+                </Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+        </form>
       </Tabs>
     </div>
   );
