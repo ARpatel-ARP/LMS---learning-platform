@@ -29,13 +29,20 @@ const CourseTab = () => {
         <CardContent>
             <div className="space-y-4 mt-5">
                 <div>
-                    <Label>
+                    <Label className="my-2 mx-1">Course Title</Label>
                         <Input
                         type='text'
                         name="Course Title"
                         placeholder="Example: Fullstack Developer"
                         />
-                    </Label>
+                </div>
+                <div>
+                    <Label className="my-2 mx-1">Course Title</Label>
+                        <Input
+                        type='text'
+                        name="Course Title"
+                        placeholder="Example: Fullstack Developer"
+                        />
                 </div>
             </div>
         </CardContent>
