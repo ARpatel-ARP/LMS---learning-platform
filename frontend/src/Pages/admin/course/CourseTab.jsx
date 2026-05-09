@@ -4,9 +4,18 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import RichTextEditor from '@/components/RichTextEditor.jsx'
-import React from 'react';
+import React, { useState } from 'react';
 
 const CourseTab = () => {
+    const [input, setInput] = useState({
+        courseTitle:"",
+        subTitle:"",
+        description:"",
+        category:"",
+        courseLevel:"",
+        coursePrice:"",
+        courseThumbnail:"",
+    })
     const isPublished = true
   return (
    <>
