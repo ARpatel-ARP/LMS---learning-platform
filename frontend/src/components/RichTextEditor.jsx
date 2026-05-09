@@ -1,7 +1,7 @@
 import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css';
 
-const RichTextEditor = () => {
+const RichTextEditor = ({input, setInput}) => {
   const { quill, quillRef } = useQuill();
   return <div ref={quillRef} />;
 };
