@@ -56,7 +56,7 @@ const CourseTab = () => {
                 </div>
                 <div>
                     <Label className="my-2 mx-1">Description</Label>
-                    <RichTextEditor/>
+                    <RichTextEditor input={input} setInput={setInput}/>
                 </div>
             </div>
         </CardContent>
