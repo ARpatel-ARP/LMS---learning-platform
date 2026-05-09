@@ -3,6 +3,7 @@ import { CardContent, CardDescription, CardHeader, CardTitle } from '@/component
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import RichTextEditor from '@/components/RichTextEditor.jsx'
 import React from 'react';
 
 const CourseTab = () => {
