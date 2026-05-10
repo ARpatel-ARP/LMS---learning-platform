@@ -70,10 +70,26 @@ const CourseTab = () => {
               <RichTextEditor input={input} setInput={setInput} />
             </div>
             <div className="flex items-center gap-5">
-                <div>
-                    <Label>Category</Label>
-                    
-                </div>
+              <div>
+                <Label>Category</Label>
+                <Select onValueChange={getSelectedCategory}>
+                  <SelectTrigger className="w-full max-w-48">
+                    <SelectValue placeholder="Select a Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Category</SelectLabel>
+                      <SelectItem value="Next.js">Next.js</SelectItem>
+                      <SelectItem value="AI-ML">AI-ML</SelectItem>
+                      <SelectItem value="Cloud Computing">
+                        Cloud Computing
+                      </SelectItem>
+                      <SelectItem value="React.js">React.js</SelectItem>
+                      <SelectItem value="Express.js">Express.js</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </CardContent>
