@@ -69,6 +69,12 @@ const CourseTab = () => {
               <Label className="my-2 mx-1">Description</Label>
               <RichTextEditor input={input} setInput={setInput} />
             </div>
+            <div className="flex items-center gap-5">
+                <div>
+                    <Label>Category</Label>
+                    
+                </div>
+            </div>
           </div>
         </CardContent>
       </Card>
