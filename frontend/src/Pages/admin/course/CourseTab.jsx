@@ -50,6 +50,8 @@ const CourseTab = () => {
               <Input
                 type="text"
                 name="Course Title"
+                value={input.courseTitle}
+                onChange={changeEvenHandler}
                 placeholder="Example: Fullstack Developer"
               />
             </div>
@@ -58,6 +60,8 @@ const CourseTab = () => {
               <Input
                 type="text"
                 name="SubTitle"
+                value={input.subTitle}
+                onChange={changeEvenHandler}
                 placeholder="Example: Become an advanced developer from zero basics"
               />
             </div>
