@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import RichTextEditor from "@/components/RichTextEditor.jsx";
 import React, { useState } from "react";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const CourseTab = () => {
   const [input, setInput] = useState({
@@ -72,7 +73,7 @@ const CourseTab = () => {
             <div className="flex items-center gap-5">
               <div>
                 <Label>Category</Label>
-                <Select onValueChange={getSelectedCategory}>
+                <Select>
                   <SelectTrigger className="w-full max-w-48">
                     <SelectValue placeholder="Select a Category" />
                   </SelectTrigger>
