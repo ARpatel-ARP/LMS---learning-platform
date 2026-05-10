@@ -72,7 +72,7 @@ const CourseTab = () => {
             </div>
             <div className="flex items-center gap-5">
               <div>
-                <Label>Category</Label>
+                <Label className="my-2 mx-1">Category</Label>
                 <Select>
                   <SelectTrigger className="w-full max-w-48">
                     <SelectValue placeholder="Select a Category" />
