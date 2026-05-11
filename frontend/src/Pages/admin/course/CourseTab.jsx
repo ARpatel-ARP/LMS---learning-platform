@@ -93,6 +93,19 @@ const CourseTab = () => {
               </div>
               <div>
                 <Label>Course Level</Label>
+                 <Select>
+                  <SelectTrigger className="w-full max-w-48">
+                    <SelectValue placeholder="Select a Level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Levels</SelectLabel>
+                      <SelectItem value="Beginner">Beginner</SelectItem>
+                      <SelectItem value="Intermediate">Intermediate</SelectItem>
+                      <SelectItem value="Advanced">Advanced</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
