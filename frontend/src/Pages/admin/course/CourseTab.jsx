@@ -91,8 +91,8 @@ const CourseTab = () => {
                   </SelectContent>
                 </Select>
               </div>
-              <div>
-                <Label>Course Level</Label>
+              <div >
+                <Label className="my-2 mx-1">Course Level</Label>
                  <Select>
                   <SelectTrigger className="w-full max-w-48">
                     <SelectValue placeholder="Select a Level" />
