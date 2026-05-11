@@ -91,6 +91,9 @@ const CourseTab = () => {
                   </SelectContent>
                 </Select>
               </div>
+              <div>
+                <Label>Course Level</Label>
+              </div>
             </div>
           </div>
         </CardContent>
