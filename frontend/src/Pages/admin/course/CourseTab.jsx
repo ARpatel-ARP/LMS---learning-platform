@@ -110,7 +110,11 @@ const CourseTab = () => {
               <div>
                 <Label>Price in (INR)</Label>
                 <Input
-                t/>
+                type="number"
+                name="courseprice"
+                value={input.coursePrice}
+                onChange={changeEvenHandler}
+                placeholder="enter price"/>
               </div>
             </div>
           </div>
