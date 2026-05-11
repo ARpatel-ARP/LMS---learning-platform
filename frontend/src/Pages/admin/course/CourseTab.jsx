@@ -107,6 +107,11 @@ const CourseTab = () => {
                   </SelectContent>
                 </Select>
               </div>
+              <div>
+                <Label>Price in (INR)</Label>
+                <Input
+                t/>
+              </div>
             </div>
           </div>
         </CardContent>
