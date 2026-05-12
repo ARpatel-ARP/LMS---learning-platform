@@ -14,7 +14,6 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Loader, Loader2 } from "lucide-react";
 
 const CourseTab = () => {
-  const isLoading = true
   const [input, setInput] = useState({
     courseTitle: "",
     subTitle: "",
@@ -28,6 +27,7 @@ const CourseTab = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
+  const isLoading = false
   const isPublished = true;
   return (
     <>
