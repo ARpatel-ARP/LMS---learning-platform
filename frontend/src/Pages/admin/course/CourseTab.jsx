@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const CourseTab = () => {
+  const isLoading = true
   const [input, setInput] = useState({
     courseTitle: "",
     subTitle: "",
@@ -129,6 +130,11 @@ const CourseTab = () => {
               </div>
               <div>
                 <Button variant="outline">Cancel</Button>
+                <Button>
+                  {
+                    isLoading
+                  }
+                </Button>
               </div>
           </div>
         </CardContent>
