@@ -118,6 +118,17 @@ const CourseTab = () => {
                 className="w-full"
                 />
               </div>
+              <div>
+                <Label className="my-2 mx-1">Price in (INR)</Label>
+                <Input
+                type="number"
+                name="coursePrice"
+                value={input.coursePrice}
+                onChange={changeEvenHandler}
+                placeholder="enter price"
+                className="w-full"
+                />
+              </div>
             </div>
           </div>
         </CardContent>
