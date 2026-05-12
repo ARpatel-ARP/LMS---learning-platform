@@ -118,6 +118,7 @@ const CourseTab = () => {
                 className="w-full"
                 />
               </div>
+            </div>
               <div>
                 <Label className="my-2 mx-1">Course Thumbnail</Label>
                 <Input
@@ -126,7 +127,9 @@ const CourseTab = () => {
                 className="w-fit"
                 />
               </div>
-            </div>
+              <div>
+                <Button variant="outline">Cancel</Button>
+              </div>
           </div>
         </CardContent>
       </Card>
