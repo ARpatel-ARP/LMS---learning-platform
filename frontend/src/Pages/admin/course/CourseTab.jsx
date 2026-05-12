@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import RichTextEditor from "@/components/RichTextEditor.jsx";
 import React, { useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Loader, Loader2 } from "lucide-react";
 
 const CourseTab = () => {
   const isLoading = true
@@ -132,7 +133,12 @@ const CourseTab = () => {
                 <Button variant="outline">Cancel</Button>
                 <Button>
                   {
-                    isLoading
+                    isLoading? (
+                      <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+                      Please wait
+                      </>
+                    )
                   }
                 </Button>
               </div>
