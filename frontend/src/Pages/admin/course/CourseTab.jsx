@@ -129,7 +129,7 @@ const CourseTab = () => {
                 className="w-fit"
                 />
               </div>
-              <div>
+              <div className="flex gap-2">
                 <Button variant="outline">Cancel</Button>
                 <Button>
                   {
