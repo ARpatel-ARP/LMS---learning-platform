@@ -138,7 +138,7 @@ const CourseTab = () => {
                       <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
                       Please wait
                       </>
-                    )
+                    ):"Save"
                   }
                 </Button>
               </div>
