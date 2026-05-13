@@ -11,6 +11,9 @@ const EditCourse = () => {
       <Link to='lecture'>
       <Button variant="ghost" className="hover:text-blue-400">Go to lectures pages</Button>
       </Link>
+      <Link to='lecture'>
+      <Button variant="ghost" className="hover:text-blue-400">Go to lectures pages</Button>
+      </Link>
     </div>
     <CourseTab/>
     </div>
