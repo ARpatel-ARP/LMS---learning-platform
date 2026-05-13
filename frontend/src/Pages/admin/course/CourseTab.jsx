@@ -131,6 +131,8 @@ const CourseTab = () => {
               </div>
               <div className="flex gap-2">
                 <Button variant="outline">Cancel</Button>
+                <Button variant="outline">Cancel</Button>
+                <Button variant="outline">Cancel</Button>
                 <Button>
                   {
                     isLoading? (
