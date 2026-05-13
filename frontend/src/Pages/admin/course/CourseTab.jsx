@@ -120,6 +120,17 @@ const CourseTab = () => {
                 className="w-full"
                 />
               </div>
+              <div>
+                <Label className="my-2 mx-1">Price in (INR)</Label>
+                <Input
+                type="number"
+                name="coursePrice"
+                value={input.coursePrice}
+                onChange={changeEvenHandler}
+                placeholder="enter price"
+                className="w-full"
+                />
+              </div>
             </div>
               <div>
                 <Label className="my-2 mx-1">Course Thumbnail</Label>
@@ -130,7 +141,6 @@ const CourseTab = () => {
                 />
               </div>
               <div className="flex gap-2">
-                <Button variant="outline">Cancel</Button>
                 <Button variant="outline">Cancel</Button>
                 <Button>
                   {
