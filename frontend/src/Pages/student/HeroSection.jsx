@@ -18,10 +18,6 @@ const HeroSection = () => {
             Search
           </Button>
         </form>
-          <Button className="bg-gray-900 h-12 text-white rounded-r-full hover:bg-gray-700 px-6">
-            Search
-          </Button>
-        </form>
         <Button className="rounded-full p-3 py-5 mt-3 bg-white text-black hover:bg-gray-900 hover:text-white">Explore Courses</Button>
       </div>
 
