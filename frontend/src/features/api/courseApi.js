@@ -16,12 +16,14 @@ export const courseApi = createApi({
           method:"POST",
           body:{courseTitle, category}
         })  
-     }),
-     getCreatorCourse: builder.query({
-        query: () => ({
-          url:"/",
-          method:"GET"
+    endpoints: (builder) => ({
+     createCourse: builder.mutation({
+        query: ({courseTitle, category}) => ({
+          url:"/create",
+          method:"POST",
+          body:{courseTitle, category}
         })  
+     }),
      getCreatorCourse: builder.query({
         query: () => ({
           url:"/",
