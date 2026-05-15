@@ -24,8 +24,6 @@ const HeroSection = () => {
       {/* Luminous bottom border */}
      <div className="absolute bottom-0 left-0 w-full h-px bg-purple-500 dark:bg-gray-400 shadow-[0_0_15px_4px_rgba(168,85,247,0.7)] dark:shadow-[0_0_15px_4px_rgba(156,163,175,0.4)]" />
      </div>
-     <div className="absolute bottom-0 left-0 w-full h-px bg-purple-500 dark:bg-gray-400 shadow-[0_0_15px_4px_rgba(168,85,247,0.7)] dark:shadow-[0_0_15px_4px_rgba(156,163,175,0.4)]" />
-     </div>
   );
 }
 export default HeroSection;
