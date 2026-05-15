@@ -8,11 +8,6 @@ export const courseApi = createApi({
     baseQuery:fetchBaseQuery({
         baseUrl:COURSE_API,
         credentials:"include"
-export const courseApi = createApi({
-    reducerPath:"courseApi",
-    baseQuery:fetchBaseQuery({
-        baseUrl:COURSE_API,
-        credentials:"include"
     }),
     endpoints: (builder) => ({
      createCourse: builder.mutation({
