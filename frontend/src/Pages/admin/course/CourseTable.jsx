@@ -100,11 +100,6 @@ const CourseTable = () => {
                   >
                   <Edit2 />
                 </Button>
-                <Button
-                  variant="ghost"
-                  >
-                  <Edit2 />
-                </Button>
                   </Link>
               </TableCell>
             </TableRow>
