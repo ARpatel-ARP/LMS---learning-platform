@@ -83,6 +83,8 @@ const CourseTab = () => {
                     <SelectGroup>
                       <SelectLabel>Category</SelectLabel>
                       <SelectItem value="Next.js">Next.js</SelectItem>
+                      <SelectItem value="Next.js">Next.js</SelectItem>
+                      <SelectItem value="Next.js">Next.js</SelectItem>
                       <SelectItem value="AI-ML">AI-ML</SelectItem>
                       <SelectItem value="Cloud Computing">
                         Cloud Computing
