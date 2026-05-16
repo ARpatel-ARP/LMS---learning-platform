@@ -125,6 +125,8 @@ const CourseTab = () => {
             </div>
               <div>
                 <Label className="my-2 mx-1">Course Thumbnail</Label>
+                <Label className="my-2 mx-1">Course Thumbnail</Label>
+                <Label className="my-2 mx-1">Course Thumbnail</Label>
                 <Input
                 type="file"
                 accept="image/*"
