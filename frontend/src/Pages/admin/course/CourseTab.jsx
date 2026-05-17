@@ -82,6 +82,8 @@ const CourseTab = () => {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Category</SelectLabel>
+                      <SelectLabel>Category</SelectLabel>
+                      <SelectLabel>Category</SelectLabel>
                       <SelectItem value="Next.js">Next.js</SelectItem>
                       <SelectItem value="Next.js">Next.js</SelectItem>
                       <SelectItem value="Next.js">Next.js</SelectItem>
