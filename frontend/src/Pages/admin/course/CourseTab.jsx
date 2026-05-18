@@ -44,6 +44,9 @@ const CourseTab = () => {
               {isPublished ? "Unpublished" : "Published"}
             </Button>
             <Button>Remove course</Button>
+            <Button>Remove course</Button>
+            <Button>Remove course</Button>
+            <Button>Remove course</Button>
           </div>
         </CardHeader>
         <CardContent>
