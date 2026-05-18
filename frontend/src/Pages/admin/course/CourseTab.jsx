@@ -91,8 +91,6 @@ const CourseTab = () => {
                       </SelectItem>
                       <SelectItem value="React.js">React.js</SelectItem>
                       <SelectItem value="Express.js">Express.js</SelectItem>
-                      <SelectItem value="Express.js">Express.js</SelectItem>
-                      <SelectItem value="Express.js">Express.js</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
