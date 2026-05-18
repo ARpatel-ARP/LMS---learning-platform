@@ -30,10 +30,12 @@ const CourseTab = () => {
   const isLoading = false
   const isPublished = true;
   return (
-    <>
+     <>
       <Card>
         <CardHeader className="flex justify-between flex-row">
           <div>
+            <CardTitle> Basic course information</CardTitle>
+            <CardTitle> Basic course information</CardTitle>
             <CardTitle> Basic course information</CardTitle>
             <CardDescription>
               Make changes to your courses here. Click save when you are done
