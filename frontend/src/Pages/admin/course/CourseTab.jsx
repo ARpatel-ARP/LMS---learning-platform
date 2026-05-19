@@ -27,7 +27,7 @@ const CourseTab = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-  const isLoading = false
+  const isLoading = true
   const isPublished = true;
   return (
      <>
