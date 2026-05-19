@@ -12,6 +12,7 @@ import RichTextEditor from "@/components/RichTextEditor.jsx";
 import React, { useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader, Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CourseTab = () => {
   const [input, setInput] = useState({
@@ -23,6 +24,7 @@ const CourseTab = () => {
     coursePrice: "",
     courseThumbnail: "",
   });
+  const navigate = useNavigate()
   const changeEvenHandler = async (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
@@ -132,7 +134,7 @@ const CourseTab = () => {
                 />
               </div>
               <div className="flex gap-2">
-                <Button variant="outline">Cancel</Button>
+                <Button onClick="" variant="outline">Cancel</Button>
                 <Button>
                   {
                     isLoading? (
