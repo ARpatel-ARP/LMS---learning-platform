@@ -34,7 +34,6 @@ const CourseTab = () => {
     setInput({...input, category:value})
   }
   const selectCourseLevel = (value) => {
-    setInput({...input, courseLevel:value})
   }
   
   const isLoading = false
