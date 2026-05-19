@@ -29,7 +29,7 @@ const CourseTab = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-  const isLoading = true
+  const isLoading = false
   const isPublished = true;
   return (
      <>
@@ -134,7 +134,7 @@ const CourseTab = () => {
                 />
               </div>
               <div className="flex gap-2">
-                <Button onClick="" variant="outline">Cancel</Button>
+                <Button onClick={()=> navigate("/admin/course")} variant="outline">Cancel</Button>
                 <Button>
                   {
                     isLoading? (
