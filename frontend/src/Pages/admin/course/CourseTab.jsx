@@ -29,6 +29,14 @@ const CourseTab = () => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
+
+  const selectCategory = (value) => {
+    setInput({...input, category:value})
+  }
+  const selectCourseLevel = (value) => {
+    setInput({...input, courseLevel:value})
+  }
+  
   const isLoading = false
   const isPublished = true;
   return (
