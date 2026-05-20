@@ -41,6 +41,7 @@ const CourseTab = () => {
     const file = e.target.files?.[0]
     if (file) {
       setInput({...input, selectThumbnail:file})
+      const fileReader = new FileReader()
     }
   }
   
