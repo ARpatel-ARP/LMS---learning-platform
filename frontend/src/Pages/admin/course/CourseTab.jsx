@@ -36,6 +36,14 @@ const CourseTab = () => {
   const selectCourseLevel = (value) => {
     setInput({...input, courseLevel:value})
   }
+
+  const selectThumbnail = (e) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setInput({...input, selectThumbnail:file})
+    }
+  }
+  
   
   const isLoading = false
   const isPublished = true;
