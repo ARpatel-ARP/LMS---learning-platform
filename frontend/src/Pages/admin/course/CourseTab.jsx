@@ -107,7 +107,7 @@ const CourseTab = () => {
               </div>
               <div >
                 <Label className="my-2 mx-1">Course Level</Label>
-                 <Select >
+                 <Select onValueChange={selectCourseLevel} >
                   <SelectTrigger className="w-full max-w-48">
                     <SelectValue placeholder="Select a Level" />
                   </SelectTrigger>
