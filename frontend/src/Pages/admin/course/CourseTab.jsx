@@ -24,6 +24,7 @@ const CourseTab = () => {
     coursePrice: "",
     courseThumbnail: "",
   });
+  const [previewThumbnail, setPreviewThumbnail] = useState("")
   const navigate = useNavigate()
   const changeEvenHandler = async (e) => {
     const { name, value } = e.target;
@@ -42,6 +43,9 @@ const CourseTab = () => {
     if (file) {
       setInput({...input, selectThumbnail:file})
       const fileReader = new FileReader()
+      fileReader.onloadend = () => setPreviewThumbnail(fileReader.result)
+      fileReader.readAsDataURL(file)
+      
     }
   }
   
