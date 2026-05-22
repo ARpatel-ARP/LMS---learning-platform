@@ -61,6 +61,9 @@ const CourseTab = () => {
             <CardDescription>
               Make changes to your courses here. Click save when you are done
             </CardDescription>
+            <CardDescription>
+              Make changes to your courses here. Click save when you are done
+            </CardDescription>
           </div>
           <div className="flex gap-2">
             <Button variant="outline">
