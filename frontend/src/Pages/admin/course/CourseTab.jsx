@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Loader, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const CourseTab = () => {
   const [input, setInput] = useState({
@@ -33,6 +34,7 @@ const CourseTab = () => {
     courseThumbnail: "",
   });
   const [previewThumbnail, setPreviewThumbnail] = useState("");
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const changeEvenHandler = async (e) => {
     const { name, value } = e.target;
