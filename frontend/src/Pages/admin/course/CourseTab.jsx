@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { useUpdateCourseMutation } from "@/features/api/courseApi";
+
 import {
   CardContent,
   CardDescription,
@@ -21,7 +23,6 @@ import {
 } from "@/components/ui/select";
 import { Loader, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 const CourseTab = () => {
   const [input, setInput] = useState({
@@ -34,7 +35,6 @@ const CourseTab = () => {
     courseThumbnail: "",
   });
   const [previewThumbnail, setPreviewThumbnail] = useState("");
-  const dispatch = useDispatch()
   const navigate = useNavigate();
   const changeEvenHandler = async (e) => {
     const { name, value } = e.target;
@@ -44,7 +44,7 @@ const CourseTab = () => {
   const selectCategory = (value) => {
     setInput({ ...input, category: value });
   };
-
+  
   const selectCourseLevel = (value) => {
     setInput({ ...input, courseLevel: value });
   };
@@ -57,12 +57,13 @@ const CourseTab = () => {
       fileReader.readAsDataURL(file);
     }
   };
+  const [updateCourse, { isLoading }] = useUpdateCourseMutation();
   const submitHandler = async (e) => {
-  e.preventDefault(); 
-
-  const formData = new FormData();  
-  formData.append("courseTitle", input.courseTitle);
-  formData.append("subTitle", input.subTitle);
+    e.preventDefault(); 
+    
+    const formData = new FormData();  
+    formData.append("courseTitle", input.courseTitle);
+    formData.append("subTitle", input.subTitle);
   formData.append("description", input.description);
   formData.append("category", input.category);
   formData.append("courseLevel", input.courseLevel);
@@ -70,10 +71,8 @@ const CourseTab = () => {
   formData.append("courseThumbnail", input.courseThumbnail);
 
   // Step 3 — your API call goes here
-  await dispatch(updateCourse(formData));
+  await updateCourse({ courseId, formData });
 };
-
-  const isLoading = false;
   const isPublished = true;
   return (
     <>

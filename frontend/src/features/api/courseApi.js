@@ -22,8 +22,15 @@ export const courseApi = createApi({
           url:"/",
           method:"GET"
         })  
-     }) 
+     }),
+      updateCourse: builder.mutation({
+        query: ({courseId, formData}) => ({
+          url:`/${courseId}`,
+          method:"PUT",
+          body:formData
+        })  
+     }),
     })
 })
-export const {useCreateCourseMutation, useGetCreatorCourseQuery} = courseApi
+export const {useCreateCourseMutation, useGetCreatorCourseQuery, useUpdateCourseMutation} = courseApi
     
