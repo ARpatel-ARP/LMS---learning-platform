@@ -161,6 +161,11 @@ const CourseTab = () => {
                 accept="image/*"
                 className="w-fit"
                 />
+                {
+                  previewThumbnail && (
+                    <img src={previewThumbnail} className="e-64 my-2" alt=" Course-thumbnail" />
+                  )
+                }
               </div>
               <div className="flex gap-2">
                 <Button onClick={()=> navigate("/admin/course")} variant="outline">Cancel</Button>
