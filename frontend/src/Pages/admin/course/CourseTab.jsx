@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Loader, Loader2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CourseTab = () => {
   const [input, setInput] = useState({
@@ -58,6 +58,7 @@ const CourseTab = () => {
     }
   };
   const [updateCourse, { isLoading }] = useUpdateCourseMutation();
+  const { courseId } = useParams();
   const submitHandler = async (e) => {
     e.preventDefault(); 
     
