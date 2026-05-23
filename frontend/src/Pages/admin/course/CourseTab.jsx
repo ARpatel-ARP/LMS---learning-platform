@@ -157,7 +157,7 @@ const CourseTab = () => {
                 <Label className="my-2 mx-1">Course Thumbnail</Label>
                 <Input
                 type="file"
-                onChange={selectCategory}
+                onChange={selectThumbnail}
                 accept="image/*"
                 className="w-fit"
                 />
