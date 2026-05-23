@@ -1,4 +1,5 @@
 import  {Course}  from "../models/course.model.js"
+import { uploadMedia } from "../utils/cloudinary.js"
 
 export const createCourse = async (req, res) => {
     try {
@@ -44,3 +45,31 @@ export const getCreatorCourse = async (req, res) => {
         })
     }
 }
+
+export const updateCourse = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const { courseTitle, subTitle, description, category, courseLevel, coursePrice } = req.body;
+    const thumbnail = req.file;
+    let updateData = { courseTitle, subTitle, description, category, courseLevel, coursePrice };
+
+    if (thumbnail) {
+      const uploadResponse = await uploadMedia(thumbnail.path);
+      updateData.courseThumbnail = uploadResponse.secure_url;
+    }
+
+
+    const course = await Course.findByIdAndUpdate(
+      courseId,
+      { courseTitle, subTitle, description, category, courseLevel, coursePrice },
+      { new: true }
+    );
+
+    if (!course) return res.status(404).json({ message: "Course not found" });
+
+    return res.status(200).json({ course, message: "Course updated successfully" });
+
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
