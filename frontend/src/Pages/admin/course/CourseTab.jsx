@@ -10,7 +10,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import RichTextEditor from "@/components/RichTextEditor.jsx";
 import React, { useState } from "react";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Loader, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,36 +32,49 @@ const CourseTab = () => {
     coursePrice: "",
     courseThumbnail: "",
   });
-  const [previewThumbnail, setPreviewThumbnail] = useState("")
-  const navigate = useNavigate()
+  const [previewThumbnail, setPreviewThumbnail] = useState("");
+  const navigate = useNavigate();
   const changeEvenHandler = async (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
   const selectCategory = (value) => {
-    setInput({...input, category:value})
-  }
-  
+    setInput({ ...input, category: value });
+  };
+
   const selectCourseLevel = (value) => {
-    setInput({...input, courseLevel:value})
-  }
+    setInput({ ...input, courseLevel: value });
+  };
   const selectThumbnail = (e) => {
-    const file = e.target.files?.[0]
+    const file = e.target.files?.[0];
     if (file) {
-      setInput({...input, selectThumbnail:file})
-      const fileReader = new FileReader()
-      fileReader.onloadend = () => setPreviewThumbnail(fileReader.result)
-      fileReader.readAsDataURL(file)
-      
+      setInput({ ...input, courseThumbnail: file });
+      const fileReader = new FileReader();
+      fileReader.onloadend = () => setPreviewThumbnail(fileReader.result);
+      fileReader.readAsDataURL(file);
     }
-  }
-  
-  
-  const isLoading = false
+  };
+  const submitHandler = async (e) => {
+  e.preventDefault();        // Step 1 — prevent page refresh
+
+  const formData = new FormData();  // Step 2 — prepare data
+  formData.append("courseTitle", input.courseTitle);
+  formData.append("subTitle", input.subTitle);
+  formData.append("description", input.description);
+  formData.append("category", input.category);
+  formData.append("courseLevel", input.courseLevel);
+  formData.append("coursePrice", input.coursePrice);
+  formData.append("courseThumbnail", input.courseThumbnail);
+
+  // Step 3 — your API call goes here
+  await dispatch(updateCourse(formData));
+};
+
+  const isLoading = false;
   const isPublished = true;
   return (
-     <>
+    <>
       <Card>
         <CardHeader className="flex justify-between flex-row">
           <div>
@@ -75,7 +96,7 @@ const CourseTab = () => {
               <Label className="my-2 mx-1">Course Title</Label>
               <Input
                 type="text"
-                name="Course Title"
+                name="courseTitle"
                 value={input.courseTitle}
                 onChange={changeEvenHandler}
                 placeholder="Example: Fullstack Developer"
@@ -85,14 +106,7 @@ const CourseTab = () => {
               <Label className="my-2 mx-1">Sub-Title</Label>
               <Input
                 type="text"
-                name="SubTitle"
-                value={input.subTitle}
-                onChange={changeEvenHandler}
-                placeholder="Example: Become an advanced developer from zero basics"
-              />
-              <Input
-                type="text"
-                name="SubTitle"
+                name="subTitle"
                 value={input.subTitle}
                 onChange={changeEvenHandler}
                 placeholder="Example: Become an advanced developer from zero basics"
@@ -125,9 +139,9 @@ const CourseTab = () => {
                   </SelectContent>
                 </Select>
               </div>
-              <div >
+              <div>
                 <Label className="my-2 mx-1">Course Level</Label>
-                 <Select onValueChange={selectCourseLevel} >
+                <Select onValueChange={selectCourseLevel}>
                   <SelectTrigger className="w-full max-w-48">
                     <SelectValue placeholder="Select a Level" />
                   </SelectTrigger>
@@ -144,42 +158,49 @@ const CourseTab = () => {
               <div>
                 <Label className="my-2 mx-1">Price in (INR)</Label>
                 <Input
-                type="number"
-                name="coursePrice"
-                value={input.coursePrice}
-                onChange={changeEvenHandler}
-                placeholder="enter price"
-                className="w-full"
+                  type="number"
+                  name="coursePrice"
+                  value={input.coursePrice}
+                  onChange={changeEvenHandler}
+                  placeholder="enter price"
+                  className="w-full"
                 />
               </div>
             </div>
-              <div>
-                <Label className="my-2 mx-1">Course Thumbnail</Label>
-                <Input
+            <div>
+              <Label className="my-2 mx-1">Course Thumbnail</Label>
+              <Input
                 type="file"
                 onChange={selectThumbnail}
                 accept="image/*"
                 className="w-fit"
+              />
+              {previewThumbnail && (
+                <img
+                  src={previewThumbnail}
+                  className="w-37 h-24 object-cover rounded-md my-2"
+                  alt=" Course-thumbnail"
                 />
-                {
-                  previewThumbnail && (
-                    <img src={previewThumbnail} className="e-64 my-2" alt=" Course-thumbnail" />
-                  )
-                }
-              </div>
-              <div className="flex gap-2">
-                <Button onClick={()=> navigate("/admin/course")} variant="outline">Cancel</Button>
-                <Button>
-                  {
-                    isLoading? (
-                      <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
-                      Please wait
-                      </>
-                    ):"Save"
-                  }
-                </Button>
-              </div>
+              )}
+            </div>
+            <div className="flex gap-2">
+              <Button
+                onClick={() => navigate("/admin/course")}
+                variant="outline"
+              >
+                Cancel
+              </Button>
+              <Button>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </>
+                ) : (
+                  "Save"
+                )}
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
