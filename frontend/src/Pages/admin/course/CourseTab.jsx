@@ -90,6 +90,13 @@ const CourseTab = () => {
                 onChange={changeEvenHandler}
                 placeholder="Example: Become an advanced developer from zero basics"
               />
+              <Input
+                type="text"
+                name="SubTitle"
+                value={input.subTitle}
+                onChange={changeEvenHandler}
+                placeholder="Example: Become an advanced developer from zero basics"
+              />
             </div>
             <div>
               <Label className="my-2 mx-1">Description</Label>
