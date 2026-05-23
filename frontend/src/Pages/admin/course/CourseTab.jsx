@@ -56,9 +56,9 @@ const CourseTab = () => {
     }
   };
   const submitHandler = async (e) => {
-  e.preventDefault();        // Step 1 — prevent page refresh
+  e.preventDefault(); 
 
-  const formData = new FormData();  // Step 2 — prepare data
+  const formData = new FormData();  
   formData.append("courseTitle", input.courseTitle);
   formData.append("subTitle", input.subTitle);
   formData.append("description", input.description);
@@ -190,7 +190,7 @@ const CourseTab = () => {
               >
                 Cancel
               </Button>
-              <Button>
+              <Button onClick={submitHandler}>
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
