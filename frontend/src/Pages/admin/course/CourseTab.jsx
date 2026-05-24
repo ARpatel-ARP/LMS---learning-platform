@@ -113,6 +113,8 @@ const CourseTab = () => {
       toast.error(error?.data?.message || "Failed to update Course");
     }
   }, [isSuccess, error]);
+
+  if(courseByIdLoading) return <Loader2 className="h-4 w-4 animate-spin"/>
   const isPublished = true;
   return (
     <>
