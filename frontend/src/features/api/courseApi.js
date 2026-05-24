@@ -47,6 +47,13 @@ export const courseApi = createApi({
         body: { lectureTitle },
       }),
     }),
+    getCourseLecture: builder.query({
+      query:(courseId) => ({
+        url: `/${courseId}/lecture`,
+        method:"POST"
+      })
+      
+    })
   }),
 });
 export const {
