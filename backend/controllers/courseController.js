@@ -138,19 +138,22 @@ export const createLecture = async (req, res) => {
         message:"Lecture title is required"
       })
     }
-    // create lecture
-    const lecture = await Lecture.create({lectureTitle})
     const course = await Course.findById(courseId)
     if (!course) {
+       return res.status(404).json({ message: "Course not found" });
+    }
+    // create lecture
+    const lecture = await Lecture.create({lectureTitle})
+    
       course.lectures.push(lecture._id)
       await course.save()
-    }
 
     return res.status(201).json({
       lecture,
       message:"Lecture created successfully"
     })
   } catch (error) {
+    console.error("createLecture error:", error);
     return res.status(500).json({
       message: "Failed to create lecture",
     });
