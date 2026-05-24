@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useCreateLectureMutation, useGetCourseByIdQuery } from "@/features/api/courseApi";
+import { useCreateLectureMutation, useGetCourseLectureQuery } from "@/features/api/courseApi";
 import { toast } from "sonner";
 
 const CreateLecture = () => {
@@ -14,7 +14,7 @@ const CreateLecture = () => {
 
   const [createLecture, { data, isLoading, error, isSuccess }] = useCreateLectureMutation();
 
-  const {data:lectureData, isLoading:lectureLoading} = useGetCourseByIdQuery(courseId)
+  const {data:lectureData, isLoading:lectureLoading} = useGetCourseLectureQuery(courseId)
 
   const createLectureHandler = async () => {
     await createLecture({ lectureTitle, courseId });
@@ -28,7 +28,7 @@ const CreateLecture = () => {
       toast.error(error?.data?.message);
     }
   }, [isSuccess, error]);
-  // console.log(lectureData);
+  console.log(lectureData);
   
   return (
     <div className="flex-1 mx-10">
