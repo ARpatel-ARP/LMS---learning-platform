@@ -61,5 +61,6 @@ export const {
   useGetCreatorCourseQuery,
   useUpdateCourseMutation,
   useGetCourseByIdQuery,
-  useCreateLectureMutation
+  useCreateLectureMutation,
+  useGetCourseLectureQuery
 } = courseApi;
