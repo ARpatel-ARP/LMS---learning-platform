@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { useUpdateCourseMutation } from "@/features/api/courseApi";
+import {
+  useGetCourseByIdQuery,
+  useUpdateCourseMutation,
+} from "@/features/api/courseApi";
 
 import {
   CardContent,
@@ -11,7 +14,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import RichTextEditor from "@/components/RichTextEditor.jsx";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -23,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { Loader, Loader2 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const CourseTab = () => {
   const [input, setInput] = useState({
@@ -44,7 +48,7 @@ const CourseTab = () => {
   const selectCategory = (value) => {
     setInput({ ...input, category: value });
   };
-  
+
   const selectCourseLevel = (value) => {
     setInput({ ...input, courseLevel: value });
   };
@@ -57,23 +61,58 @@ const CourseTab = () => {
       fileReader.readAsDataURL(file);
     }
   };
-  const [updateCourse, { isLoading }] = useUpdateCourseMutation();
-  const { courseId } = useParams();
-  const submitHandler = async (e) => {
-    e.preventDefault(); 
-    
-    const formData = new FormData();  
-    formData.append("courseTitle", input.courseTitle);
-    formData.append("subTitle", input.subTitle);
-  formData.append("description", input.description);
-  formData.append("category", input.category);
-  formData.append("courseLevel", input.courseLevel);
-  formData.append("coursePrice", input.coursePrice);
-  formData.append("courseThumbnail", input.courseThumbnail);
 
-  // Step 3 — your API call goes here
-  await updateCourse({ courseId, formData });
-};
+  const { courseId } = useParams();
+  const { data: courseByIdData, isLoading: courseByIdLoading } =
+    useGetCourseByIdQuery(courseId);
+  const course = courseByIdData?.course;
+  useEffect(() => {
+    if (course) {
+      setInput({
+        courseTitle: course.courseTitle || "",
+        subTitle:
+          !course.subTitle || course.subTitle === "undefined"
+            ? ""
+            : course.subTitle,
+        description:
+          !course.description || course.description === "undefined"
+            ? ""
+            : course.description,
+        category: course.category || "",
+        courseLevel: course.courseLevel || "",
+        coursePrice: course.coursePrice || "",
+        courseThumbnail: course.courseThumbnail || "",
+      });
+    }
+  }, [course]);
+
+  const [updateCourse, { data, isLoading, error, isSuccess }] =
+    useUpdateCourseMutation();
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    console.log(input);
+
+    const formData = new FormData();
+    formData.append("courseTitle", input.courseTitle);
+    formData.append("subTitle", input.subTitle || "");
+    formData.append("description", input.description);
+    formData.append("category", input.category);
+    formData.append("courseLevel", input.courseLevel);
+    formData.append("coursePrice", input.coursePrice);
+    formData.append("courseThumbnail", input.courseThumbnail);
+
+    // Step 3 — your API call goes here
+    await updateCourse({ courseId, formData });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data.message || "Course updated");
+    }
+    if (error) {
+      toast.error(error?.data?.message || "Failed to update Course");
+    }
+  }, [isSuccess, error]);
   const isPublished = true;
   return (
     <>
@@ -121,7 +160,7 @@ const CourseTab = () => {
             <div className="flex items-center gap-5">
               <div>
                 <Label className="my-2 mx-1">Category</Label>
-                <Select onValueChange={selectCategory}>
+                <Select value={input.category} onValueChange={selectCategory}>
                   <SelectTrigger className="w-full max-w-48">
                     <SelectValue placeholder="Select a Category" />
                   </SelectTrigger>
@@ -143,7 +182,10 @@ const CourseTab = () => {
               </div>
               <div>
                 <Label className="my-2 mx-1">Course Level</Label>
-                <Select onValueChange={selectCourseLevel}>
+                <Select
+                  value={input.courseLevel}
+                  onValueChange={selectCourseLevel}
+                >
                   <SelectTrigger className="w-full max-w-48">
                     <SelectValue placeholder="Select a Level" />
                   </SelectTrigger>
