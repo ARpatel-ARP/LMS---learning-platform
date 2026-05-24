@@ -6,13 +6,13 @@ import { Input } from "@/components/ui/input";
 import { useCreateCourseMutation } from "@/features/api/courseApi";
 
 const CreateLecture = () => {
-     const [courseTitle, setCourseTitle] = useState("");
+     const [lectureTitle, setLectureTitle] = useState("");
       const navigate = useNavigate();
         const [createCourse, { data, isLoading, error, isSuccess }] =
           useCreateCourseMutation();
        const createCourseHandler = async () => {
           try {
-            await createCourse({courseTitle}).unwrap();
+            await createCourse({lectureTitle}).unwrap();
           } catch (err) {
             console.error("Create course failed:", err);
           }
@@ -20,7 +20,7 @@ const CreateLecture = () => {
   return (
     <div className="flex-1 mx-10">
       <div className="mb-4">
-        <h1 className="font-bold text-xl">Lets add Course</h1>
+        <h1 className="font-bold text-xl">Lets add Lectures</h1>
         <p className="text-sm py-3">
           Adding a new course to the platform is a straightforward process that
           allows administrators to expand the learning catalog and provide
@@ -36,9 +36,9 @@ const CreateLecture = () => {
           <Input
             className="pt-2 border border-transparent rounded w-full px-2 outline-none focus:border-gray-500"
             type="text"
-            name="courseTitle"
-            value={courseTitle}
-            onChange={(e) => setCourseTitle(e.target.value)}
+            name="lectureTitle"
+            value={lectureTitle}
+            onChange={(e) => setLectureTitle(e.target.value)}
             placeholder="Your Course Name"
           />
         </div>
