@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useCreateCourseMutation } from "@/features/api/courseApi";
 
 const CreateLecture = () => {
      const [lectureTitle, setLectureTitle] = useState("");
+     const params = useParams()
+     const courseId = params.courseId
       const navigate = useNavigate();
         const [createCourse, { data, isLoading, error, isSuccess }] =
           useCreateCourseMutation();
@@ -43,7 +45,7 @@ const CreateLecture = () => {
           />
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" onClick={() => navigate("/admin/course")}>
+          <Button variant="outline" onClick={() => navigate(`/admin/course/${courseId}`)}>
             Back
           </Button>
           <Button disabled={isLoading} onClick={createCourseHandler}>
