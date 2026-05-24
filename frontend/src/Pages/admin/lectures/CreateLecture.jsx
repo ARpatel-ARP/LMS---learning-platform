@@ -3,7 +3,10 @@ import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useCreateLectureMutation, useGetCourseLectureQuery } from "@/features/api/courseApi";
+import {
+  useCreateLectureMutation,
+  useGetCourseLectureQuery,
+} from "@/features/api/courseApi";
 import { toast } from "sonner";
 
 const CreateLecture = () => {
@@ -12,9 +15,14 @@ const CreateLecture = () => {
   const courseId = params.courseId;
   const navigate = useNavigate();
 
-  const [createLecture, { data, isLoading, error, isSuccess }] = useCreateLectureMutation();
+  const [createLecture, { data, isLoading, error, isSuccess }] =
+    useCreateLectureMutation();
 
-  const {data:lectureData, isLoading:lectureLoading} = useGetCourseLectureQuery(courseId)
+  const {
+    data: lectureData,
+    isLoading: lectureLoading,
+    error: lectureError,
+  } = useGetCourseLectureQuery(courseId);
 
   const createLectureHandler = async () => {
     await createLecture({ lectureTitle, courseId });
@@ -29,7 +37,7 @@ const CreateLecture = () => {
     }
   }, [isSuccess, error]);
   console.log(lectureData);
-  
+
   return (
     <div className="flex-1 mx-10">
       <div className="mb-4">
@@ -69,9 +77,20 @@ const CreateLecture = () => {
                 Please wait
               </>
             ) : (
-              "Create"
+              "Create Lecture"
             )}
           </Button>
+        </div>
+        <div className="mt-10">
+          {lectureLoading ? (
+            <p>Loading lecture...</p>
+          ) : lectureError ? (
+            <p>Failed to load lecture</p>
+          ) : lectureData?.lectures?.length === 0 ? (
+            <p>No lecture available</p>
+          ) : (
+            <Lecture />
+          )}
         </div>
       </div>
     </div>
