@@ -12,12 +12,8 @@ const CreateLecture = () => {
       const navigate = useNavigate();
         const [createCourse, { data, isLoading, error, isSuccess }] =
           useCreateCourseMutation();
-       const createCourseHandler = async () => {
-          try {
-            await createCourse({lectureTitle}).unwrap();
-          } catch (err) {
-            console.error("Create course failed:", err);
-          }
+       const createLectureHandler = async () => {
+          
         };
   return (
     <div className="flex-1 mx-10">
@@ -48,7 +44,7 @@ const CreateLecture = () => {
           <Button variant="outline" onClick={() => navigate(`/admin/course/${courseId}`)}>
             Back
           </Button>
-          <Button disabled={isLoading} onClick={createCourseHandler}>
+          <Button disabled={isLoading} onClick={createLectureHandler}>
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
