@@ -198,6 +198,13 @@ const CourseTab = () => {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
+                {(previewThumbnail || input.courseThumbnail) && (
+                  <img
+                    src={previewThumbnail || input.courseThumbnail}
+                    className="w-37 h-24 object-cover rounded-md my-2"
+                    alt="Course-thumbnail"
+                  />
+                )}
               </div>
               <div>
                 <Label className="my-2 mx-1">Price in (INR)</Label>
