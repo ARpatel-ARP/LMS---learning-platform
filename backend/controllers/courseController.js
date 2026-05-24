@@ -143,7 +143,13 @@ export const createLecture = async (req, res) => {
     const course = await Course.findById(courseId)
     if (condition) {
       course.lectures.push(lecture._id)
+      await course.save()
     }
+
+    return res.status(201).json({
+      lecture,
+      message:"Lecture created successfully"
+    })
   } catch (error) {
     return res.status(500).json({
       message: "Failed to create lecture",
