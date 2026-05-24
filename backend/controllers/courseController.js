@@ -141,7 +141,7 @@ export const createLecture = async (req, res) => {
     // create lecture
     const lecture = await Lecture.create({lectureTitle})
     const course = await Course.findById(courseId)
-    if (condition) {
+    if (!course) {
       course.lectures.push(lecture._id)
       await course.save()
     }
@@ -153,6 +153,17 @@ export const createLecture = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: "Failed to create lecture",
+    });
+  }
+}
+
+export const getCourseLecture = async (req, res) => {
+  try {
+    const {courseId} = req.params
+    const course = await Course.findById(courseId)
+  } catch (error) {
+     return res.status(500).json({
+      message: "Failed to get lecture",
     });
   }
 }
