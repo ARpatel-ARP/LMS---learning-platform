@@ -3,28 +3,33 @@ import { Button } from "@/components/ui/button";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useCreateLectureMutation } from "@/features/api/courseApi";
+import { useCreateLectureMutation, useGetCourseByIdQuery } from "@/features/api/courseApi";
 import { toast } from "sonner";
 
 const CreateLecture = () => {
-     const [lectureTitle, setLectureTitle] = useState("");
-     const params = useParams()
-     const courseId = params.courseId
-      const navigate = useNavigate();
-        const [createLecture, { data, isLoading, error, isSuccess }] =
-          useCreateLectureMutation();
-       const createLectureHandler = async () => {
-          await createLecture({lectureTitle, courseId})
-        };
+  const [lectureTitle, setLectureTitle] = useState("");
+  const params = useParams();
+  const courseId = params.courseId;
+  const navigate = useNavigate();
 
-        useEffect(() => {
-          if (isSuccess) {
-            toast.success(data.message)
-          }
-          if (error) {
-            toast.error(error?.data?.message)
-          }
-        },[isSuccess, error])
+  const [createLecture, { data, isLoading, error, isSuccess }] = useCreateLectureMutation();
+
+  const {data:lectureData, isLoading:lectureLoading} = useGetCourseByIdQuery(courseId)
+
+  const createLectureHandler = async () => {
+    await createLecture({ lectureTitle, courseId });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data.message);
+    }
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+  }, [isSuccess, error]);
+  // console.log(lectureData);
+  
   return (
     <div className="flex-1 mx-10">
       <div className="mb-4">
@@ -51,7 +56,10 @@ const CreateLecture = () => {
           />
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" onClick={() => navigate(`/admin/course/${courseId}`)}>
+          <Button
+            variant="outline"
+            onClick={() => navigate(`/admin/course/${courseId}`)}
+          >
             Back
           </Button>
           <Button disabled={isLoading} onClick={createLectureHandler}>
@@ -68,6 +76,6 @@ const CreateLecture = () => {
       </div>
     </div>
   );
-}
+};
 
 export default CreateLecture;
