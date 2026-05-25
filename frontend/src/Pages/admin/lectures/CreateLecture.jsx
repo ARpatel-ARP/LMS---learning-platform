@@ -8,6 +8,7 @@ import {
   useGetCourseLectureQuery,
 } from "@/features/api/courseApi";
 import { toast } from "sonner";
+import Lecture from "./Lecture";
 
 const CreateLecture = () => {
   const [lectureTitle, setLectureTitle] = useState("");
@@ -89,7 +90,10 @@ const CreateLecture = () => {
           ) : lectureData?.lectures?.length === 0 ? (
             <p>No lecture available</p>
           ) : (
-            <Lecture />
+            lectureData.lectures.map((lecture,index) => (
+              <Lecture key={lecture._id} lecture={lecture} index={index}  courseId={courseId}/>
+
+            ))
           )}
         </div>
       </div>
