@@ -13,31 +13,32 @@ import axios from "axios";
 
 import React, { useState } from "react";
 
-const MEDIA_API="http://localhost:8000/api/v1/media"
+const MEDIA_API = "http://localhost:8000/api/v1/media";
 
 const LectureTab = () => {
+  const [title, setTitle] = useState("");
+  const [uploadvideoinfo, setUploadVideoInfo] = useState("");
+  const [isFree, setIsFree] = useState(false);
+  const [mediaProgress, setMediaProgress] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [btnDisable, setBtnDisable] = useState(true);
 
-    const [title, setTitle] = useState("")
-    const [uploadvideoinfo, setUploadVideoInfo ] = useState("")
-    const [isFree, setIsFree] = useState(false)
-    const [mediaProgress, setMediaProgress] = useState(false)
-    const [ uploadProgress, setUploadProgress] = useState(0)
-    const [ btnDisable, setBtnDisable] = useState(true)
-
-    const fileChangeHandler = async (e) => {
-        const file = e.target.files[0]
-        if (file) {
-            const formData = new FormData()
-            formData.append("file", file)
-            setMediaProgress(true)
-            try {
-                const res = await axios.post()
-            } catch (error) {
-                
-            }
-
-        }
+  const fileChangeHandler = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      setMediaProgress(true);
+      try {
+        const res = await axios.post(`${MEDIA_API}/upload-video`, formData, {
+          onUploadProgress: ({ loaded, total }) => {
+            setUploadProgress(Math.round((loaded * 100) / total));
+          },
+        });
+        onu;
+      } catch (error) {}
     }
+  };
   return (
     <Card>
       <CardHeader>
@@ -71,7 +72,7 @@ const LectureTab = () => {
           <Label htmlFor="free-mode">Is this Video free</Label>
         </div>
         <div className="my-3">
-            <Button>Update lecture</Button>
+          <Button>Update lecture</Button>
         </div>
       </CardContent>
     </Card>
