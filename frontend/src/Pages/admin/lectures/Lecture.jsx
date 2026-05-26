@@ -15,7 +15,7 @@ const Lecture = ({lecture, courseId, index}) => {
       <Edit
       onClick={goToUpdateLecture}
       size={24}
-      className='cursor-pointer text-gray-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-300'/>
+      className='p-0.5 cursor-pointer text-gray-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-300'/>
     </div>
   );
 }
