@@ -35,7 +35,7 @@ const LectureTab = () => {
             setUploadProgress(Math.round((loaded * 100) / total));
           },
         });
-        onu;
+        
       } catch (error) {}
     }
   };
