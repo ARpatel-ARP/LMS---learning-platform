@@ -22,7 +22,7 @@ const CreateLecture = () => {
   const {
     data: lectureData,
     isLoading: lectureLoading,
-    error: lectureError,
+    error: lectureError, refetch
   } = useGetCourseLectureQuery(courseId);
 
   const createLectureHandler = async () => {
@@ -31,6 +31,7 @@ const CreateLecture = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      refetch();
       toast.success(data.message);
     }
     if (error) {

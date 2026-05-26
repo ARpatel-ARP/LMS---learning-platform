@@ -11,7 +11,7 @@ const Lecture = ({lecture, courseId, index}) => {
   return (
     <div className='flex items-center justify-between bg-gray-200 dark:bg-[#1F1F1F] px-4 py-2 rounded-md'>
       <h1 className='font-bold text-gray-800 dark:text-gray-300'>
-        Lecture - {index+1}:{lecture.lectureTitle}</h1>
+        Lecture - {index+1} : {lecture.lectureTitle}</h1>
       <Edit
       onClick={goToUpdateLecture}
       size={24}
