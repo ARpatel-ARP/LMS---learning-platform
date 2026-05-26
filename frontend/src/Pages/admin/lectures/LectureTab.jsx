@@ -45,6 +45,9 @@ const LectureTab = () => {
           <Switch id="free-mode" />
           <Label htmlFor="free-mode">Is this Video free</Label>
         </div>
+        <div className="my-3">
+            <Button>Update lecture</Button>
+        </div>
       </CardContent>
     </Card>
   );
