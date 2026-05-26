@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@hugeicons/core-free-icons";
+import { Switch } from "@/components/ui/switch";
 
 import React from "react";
 
@@ -35,15 +35,15 @@ const LectureTab = () => {
             placeholder="Ex: Introduction to Javascript"
           />
         </div>
-        <div className="">
-          <Label>
+        <div className="my-5">
+          <Label className="my-2">
             Video <span className="text-red-500">*</span>
           </Label>
           <Input type="file" accept="video/*" className="w-fit" />
         </div>
         <div className="flex items-center space-x-2 my-5">
-          <Switch id="airplane-mode" />
-          <Label htmlFor="airplane-mode">Airplane Mode</Label>
+          <Switch id="free-mode" />
+          <Label htmlFor="free-mode">Is this Video free</Label>
         </div>
       </CardContent>
     </Card>
