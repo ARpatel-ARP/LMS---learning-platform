@@ -44,6 +44,9 @@ const LectureTab = () => {
       <CardHeader>
         <div className="justify-between">
           <CardTitle>Edit Lecture</CardTitle>
+          <CardTitle>Edit Lecture</CardTitle>
+          <CardTitle>Edit Lecture</CardTitle>
+          <CardTitle>Edit Lecture</CardTitle>
           <CardDescription className="my-1">
             Make changes and click save when done
           </CardDescription>

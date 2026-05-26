@@ -19,5 +19,4 @@ const Lecture = ({lecture, courseId, index}) => {
     </div>
   );
 }
-
 export default Lecture;
