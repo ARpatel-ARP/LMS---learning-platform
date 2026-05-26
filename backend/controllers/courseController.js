@@ -179,3 +179,12 @@ export const getCourseLecture = async (req, res) => {
     });
   }
 }
+export const updateLecture = async (req, res) => {
+  try {
+    const {lectureTitle, videoInfo, isPreviewFree} = req.body
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to get lecture",
+    });
+  }
+}

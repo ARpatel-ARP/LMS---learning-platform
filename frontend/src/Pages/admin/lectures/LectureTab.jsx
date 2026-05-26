@@ -10,9 +10,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
-import React from "react";
+import React, { useState } from "react";
 
 const LectureTab = () => {
+
+    const [title, setTitle] = useState("")
+    const [uploadvideoinfo, setUploadVideoInfo ] = useState("")
+    const [isFree, setIsFree] = useState(false)
+    const [mediaProgress, setMediaProgress] = useState(false)
+    const [ uploadProgress, setUploadProgress] = useState(0)
+    const [ btnDisable, setBtnDisable] = useState(true)
   return (
     <Card>
       <CardHeader>
