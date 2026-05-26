@@ -26,10 +26,11 @@ const LectureTab = () => {
                 placeholder="Ex: Introduction to Javascript"
                 />
             </div>
-            <div>
+            <div className=''>
                 <Label>Video <span className='text-red-500'>*</span></Label>
                 <Input
                 type="file"
+                accept="video/*"
                 className="w-fit"
                 />
             </div>
