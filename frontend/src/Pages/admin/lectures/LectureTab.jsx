@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import axios from "axios";
 
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 const MEDIA_API = "http://localhost:8000/api/v1/media";
 
@@ -35,8 +36,20 @@ const LectureTab = () => {
             setUploadProgress(Math.round((loaded * 100) / total));
           },
         });
+        if (res.data.success) {
+          setUploadVideoInfo({videUrl:res.data.data.url, publicId:res.data.data.public_id})
+          setBtnDisable(false);
+          toast.success(res.data.message)
+        }
         
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+        toast.error("Video upload failed")
+        
+      }
+      finally{
+        setMediaProgress(false)
+      }
     }
   };
   return (
