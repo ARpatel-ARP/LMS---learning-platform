@@ -73,8 +73,6 @@ const LectureTab = () => {
         </div>
         <div className="my-3">
           <Button>Update lecture</Button>
-          <Button>Update lecture</Button>
-          <Button>Update lecture</Button>
         </div>
       </CardContent>
     </Card>
