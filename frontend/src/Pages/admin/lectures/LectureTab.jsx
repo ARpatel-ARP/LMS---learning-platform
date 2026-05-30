@@ -10,24 +10,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
-import { useUpdateCourseMutation } from "@/features/api/courseApi";
+import { useUpdateCourseMutation, useUpdateLectureMutation } from "@/features/api/courseApi";
 import axios from "axios";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 const MEDIA_API = "http://localhost:8000/api/v1/media";
 
 const LectureTab = () => {
-  const [title, setTitle] = useState("");
-  const [uploadvideoinfo, setUploadVideoInfo] = useState("");
+  const [lectureTitle, setLectureTitle] = useState("");
+  const [uploadVideoInfo, setUploadVideoInfo] = useState("");
   const [isFree, setIsFree] = useState(false);
   const [mediaProgress, setMediaProgress] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [btnDisable, setBtnDisable] = useState(true);
+  const params = useParams();
+  const { courseId, lectureId } = params;
 
   const [updateLecture, { data, isLoading, error, isSuccess }] =
-    useUpdateCourseMutation();
+    useUpdateLectureMutation();
 
   const fileChangeHandler = async (e) => {
     const file = e.target.files[0];
@@ -60,9 +63,27 @@ const LectureTab = () => {
       }
     }
   };
+
+  const updateLectureHandler = async () => {
+    await updateLecture({
+      lectureTitle,
+      videoInfo:uploadVideoInfo,
+      courseId,
+      lectureId,
+      isPreviewFree:isFree,
+    });
+    console.log({ lectureTitle, uploadVideoInfo, courseId, lectureId, isFree });
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data.message);
+    }
+    if (error) {
+      toast.error(error.data.message);
+    }
+  }, [isSuccess, error]);
   return (
     <Card>
-      <Button onClick={() => toast.success("test toast")}>Test Toast</Button>
       <CardHeader>
         <div className="justify-between">
           <CardTitle>Edit Lecture</CardTitle>
@@ -79,6 +100,7 @@ const LectureTab = () => {
           <Label>Title</Label>
           <Input
             className="mt-2"
+            onChange={(e) => setLectureTitle(e.target.value)}
             type="text"
             placeholder="Ex: Introduction to Javascript"
           />
@@ -105,7 +127,7 @@ const LectureTab = () => {
           </div>
         )}
         <div className="my-3">
-          <Button>Update lecture</Button>
+          <Button onClick={updateLectureHandler}>Update lecture</Button>
         </div>
       </CardContent>
     </Card>

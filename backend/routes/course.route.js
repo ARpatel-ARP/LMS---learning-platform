@@ -11,7 +11,7 @@ router.route("/:courseId").put(isAuthenticated, upload.single("courseThumbnail")
 router.route("/:courseId").get(isAuthenticated, getCourseById)
 router.route("/:courseId/lecture").post(isAuthenticated, createLecture)
 router.route("/:courseId/lecture").get(isAuthenticated, getCourseLecture)
-router.route("/:courseId/lecture/:lectureId").post(isAuthenticated, updateLecture)
+router.route("/:courseId/lecture/:lectureId").put(isAuthenticated, updateLecture)
 router.route("/lecture/:lectureId").delete(isAuthenticated, removeLecture)
 router.route("/lecture/:lectureId").get(isAuthenticated, getLecById)
 export default router

@@ -198,7 +198,7 @@ export const updateLecture = async (req, res) => {
     await lecture.save()
 
     const course = await Course.findById(courseId)
-    if (course && !course.lectures.include(lecture._id)) {
+    if (course && !course.lectures.includes(lecture._id)) {
       course.lectures.push(lecture._id)
       await course.save()
     }
@@ -232,9 +232,9 @@ export const removeLecture = async (req, res) => {
       {lecture:lectureId},
       {$pull:{lecture:lectureId}}
     )
-    return res.status(200).json{
+    return res.status(200).json({
       message:"Lecture removed successfully."
-    }
+    })
 
   } catch (error) {
     return res.status(500).json({
