@@ -161,7 +161,6 @@ export const createLecture = async (req, res) => {
 }
 
 export const getCourseLecture = async (req, res) => {
-  console.log("getCourseById hit with:", req.params); 
   try {
     const {courseId} = req.params
     const course = await Course.findById(courseId).populate("lectures")
@@ -192,8 +191,8 @@ export const updateLecture = async (req, res) => {
     }
     // update lecture
     if (lectureTitle) lecture.lectureTitle = lectureTitle
-    if (videoInfo.videoUrl) lecture.videoUrl = videoInfo.videoUrl
-    if(videoInfo.publicId) lecture.publicId = videoInfo.publicId
+    if (videoInfo?.videoUrl) lecture.videoUrl = videoInfo.videoUrl
+    if(videoInfo?.publicId) lecture.publicId = videoInfo.publicId
     if(isPreviewFree) lecture.isPreviewFree = isPreviewFree
 
     await lecture.save()
@@ -216,8 +215,6 @@ export const updateLecture = async (req, res) => {
 }
 
 export const removeLecture = async (req, res) => {
-  console.log("removeLecture hit"); // 👈
-  console.log("params:", req.params);
   try {
     const {lectureId} = req.params
     const lecture = await Lecture.findByIdAndDelete(lectureId)

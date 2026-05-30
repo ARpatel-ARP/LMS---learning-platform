@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
 import {
+  useGetLectureByIdQuery,
   useRemoveLectureMutation,
   useUpdateLectureMutation,
 } from "@/features/api/courseApi";
@@ -101,6 +102,20 @@ const LectureTab = () => {
       toast.error(error.data.message);
     }
   }, [isSuccess, error]);
+
+  const { data: lecData, isLoading: LecLoading } =
+    useGetLectureByIdQuery(lectureId);
+  const lecture = lecData?.lecture;
+  useEffect(() => {
+    if (lecData) {
+      setLectureTitle(lecture.lectureTitle);
+      setIsFree(lecture.isPreviewFree);
+      setUploadVideoInfo({
+        videoUrl: lecture.videoUrl,
+        publicId: lecture.publicId,
+      });
+    }
+  }, [lecture]);
   return (
     <Card>
       <CardHeader>
@@ -111,13 +126,19 @@ const LectureTab = () => {
           </CardDescription>
         </div>
         <div>
-          <Button disabled={removeLoading} className="bg-red-500" onClick={removeLectureHandler}>
-            {
-              removeLoading ? <>
-              <Loader className="mr-2 h-4 w-4 animate-spin"/>
-              Please Wait
-              </> : "Remove Lecture"
-            }
+          <Button
+            disabled={removeLoading}
+            className="bg-red-500"
+            onClick={removeLectureHandler}
+          >
+            {removeLoading ? (
+              <>
+                <Loader className="mr-2 h-4 w-4 animate-spin" />
+                Please Wait
+              </>
+            ) : (
+              "Remove Lecture"
+            )}
           </Button>
         </div>
       </CardHeader>
@@ -126,6 +147,7 @@ const LectureTab = () => {
           <Label>Title</Label>
           <Input
             className="mt-2"
+            value={lectureTitle}
             onChange={(e) => setLectureTitle(e.target.value)}
             type="text"
             placeholder="Ex: Introduction to Javascript"
@@ -143,7 +165,11 @@ const LectureTab = () => {
           />
         </div>
         <div className="flex items-center space-x-2 my-5">
-          <Switch id="free-mode" />
+          <Switch
+            id="free-mode"
+            checked={isFree}
+            onCheckedChange={(value) => setIsFree(value)}
+          />
           <Label htmlFor="free-mode">Is this Video free</Label>
         </div>
         {mediaProgress && (
@@ -154,12 +180,14 @@ const LectureTab = () => {
         )}
         <div className="my-3">
           <Button disabled={isLoading} onClick={updateLectureHandler}>
-            {
-             isLoading ? <>
-              <Loader className="mr-2 h-4 w-4 animate-spin"/>
-              Please Wait
-              </> : "Update Lecture"
-            }
+            {isLoading ? (
+              <>
+                <Loader className="mr-2 h-4 w-4 animate-spin" />
+                Please Wait
+              </>
+            ) : (
+              "Update Lecture"
+            )}
           </Button>
         </div>
       </CardContent>
