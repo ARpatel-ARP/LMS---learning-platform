@@ -10,8 +10,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
-import { useUpdateCourseMutation, useUpdateLectureMutation } from "@/features/api/courseApi";
+import {
+  useRemoveLectureMutation,
+  useUpdateLectureMutation,
+} from "@/features/api/courseApi";
 import axios from "axios";
+import { Loader } from "lucide-react";
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -28,9 +32,6 @@ const LectureTab = () => {
   const [btnDisable, setBtnDisable] = useState(true);
   const params = useParams();
   const { courseId, lectureId } = params;
-
-  const [updateLecture, { data, isLoading, error, isSuccess }] =
-    useUpdateLectureMutation();
 
   const fileChangeHandler = async (e) => {
     const file = e.target.files[0];
@@ -64,13 +65,31 @@ const LectureTab = () => {
     }
   };
 
+  const [
+    removeLecture,
+    { data: removeData, isLoading: removeLoading, isSuccess: removeSuccess },
+  ] = useRemoveLectureMutation();
+
+  const removeLectureHandler = async () => {
+    await removeLecture(lectureId);
+  };
+
+  useEffect(() => {
+    if (removeSuccess) {
+      toast.success(removeData.message);
+    }
+  }, [removeSuccess]);
+
+  const [updateLecture, { data, isLoading, error, isSuccess }] =
+    useUpdateLectureMutation();
+
   const updateLectureHandler = async () => {
     await updateLecture({
       lectureTitle,
-      videoInfo:uploadVideoInfo,
+      videoInfo: uploadVideoInfo,
       courseId,
       lectureId,
-      isPreviewFree:isFree,
+      isPreviewFree: isFree,
     });
     console.log({ lectureTitle, uploadVideoInfo, courseId, lectureId, isFree });
   };
@@ -92,7 +111,14 @@ const LectureTab = () => {
           </CardDescription>
         </div>
         <div>
-          <Button className="bg-red-500">Remove Lecture</Button>
+          <Button disabled={removeLoading} className="bg-red-500" onClick={removeLectureHandler}>
+            {
+              removeLoading ? <>
+              <Loader className="mr-2 h-4 w-4 animate-spin"/>
+              Please Wait
+              </> : "Remove Lecture"
+            }
+          </Button>
         </div>
       </CardHeader>
       <CardContent>
@@ -127,7 +153,14 @@ const LectureTab = () => {
           </div>
         )}
         <div className="my-3">
-          <Button onClick={updateLectureHandler}>Update lecture</Button>
+          <Button disabled={isLoading} onClick={updateLectureHandler}>
+            {
+             isLoading ? <>
+              <Loader className="mr-2 h-4 w-4 animate-spin"/>
+              Please Wait
+              </> : "Update Lecture"
+            }
+          </Button>
         </div>
       </CardContent>
     </Card>

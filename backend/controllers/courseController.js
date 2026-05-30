@@ -1,6 +1,6 @@
 import { Course } from "../models/course.model.js";
 import { Lecture } from "../models/lecture.model.js";
-import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
+import { deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
 
 export const createCourse = async (req, res) => {
   try {
@@ -161,6 +161,7 @@ export const createLecture = async (req, res) => {
 }
 
 export const getCourseLecture = async (req, res) => {
+  console.log("getCourseById hit with:", req.params); 
   try {
     const {courseId} = req.params
     const course = await Course.findById(courseId).populate("lectures")
@@ -215,22 +216,25 @@ export const updateLecture = async (req, res) => {
 }
 
 export const removeLecture = async (req, res) => {
+  console.log("removeLecture hit"); // 👈
+  console.log("params:", req.params);
   try {
     const {lectureId} = req.params
-    const lecture = await findByIdAndDelete(lectureId)
+    const lecture = await Lecture.findByIdAndDelete(lectureId)
     if (!lecture) {
       return res.status(404).json({
         message:"Lecture not found"
       })
     }
+    console.log("lecture.publicId:", lecture.publicId); 
     // delete media from cloudinary 
     if (lecture.publicId) {
-      await deleteMediaFromCloudinary(lecture.publicId)
+      await deleteVideoFromCloudinary(lecture.publicId)
     }
     // Remove the lec reference in the course
     await Course.updateOne(
-      {lecture:lectureId},
-      {$pull:{lecture:lectureId}}
+      {lectures:lectureId},
+      {$pull:{lectures:lectureId}}
     )
     return res.status(200).json({
       message:"Lecture removed successfully."
