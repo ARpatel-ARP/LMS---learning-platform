@@ -182,6 +182,79 @@ export const getCourseLecture = async (req, res) => {
 export const updateLecture = async (req, res) => {
   try {
     const {lectureTitle, videoInfo, isPreviewFree} = req.body
+    const {courseId, lectureId} = req.params;
+    const lecture = await Lecture.findById(lectureId)
+    if (!lecture) {
+      return res.status(404).json({
+        message:"Lecture not found"
+      })
+    }
+    // update lecture
+    if (lectureTitle) lecture.lectureTitle = lectureTitle
+    if (videoInfo.videoUrl) lecture.videoUrl = videoInfo.videoUrl
+    if(videoInfo.publicId) lecture.publicId = videoInfo.publicId
+    if(isPreviewFree) lecture.isPreviewFree = isPreviewFree
+
+    await lecture.save()
+
+    const course = await Course.findById(courseId)
+    if (course && !course.lectures.include(lecture._id)) {
+      course.lectures.push(lecture._id)
+      await course.save()
+    }
+
+    return res.status(200).json({
+      lecture,
+      message:"Lecture updated successfully"
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to Update lecture",
+    });
+  }
+}
+
+export const removeLecture = async (req, res) => {
+  try {
+    const {lectureId} = req.params
+    const lecture = await findByIdAndDelete(lectureId)
+    if (!lecture) {
+      return res.status(404).json({
+        message:"Lecture not found"
+      })
+    }
+    // delete media from cloudinary 
+    if (lecture.publicId) {
+      await deleteMediaFromCloudinary(lecture.publicId)
+    }
+    // Remove the lec reference in the course
+    await Course.updateOne(
+      {lecture:lectureId},
+      {$pull:{lecture:lectureId}}
+    )
+    return res.status(200).json{
+      message:"Lecture removed successfully."
+    }
+
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to remove lecture",
+    });
+  }
+} 
+
+export const getLecById = async (req, res) => {
+  try {
+    const {lectureId} = req.params
+    const lecture = await Lecture.findById(lectureId)
+    if (!lecture) {
+      return res.status(404).json({
+        message:"Lecture not dounf"
+      })
+    }
+    return res.status(200).json({
+      lecture
+    })
   } catch (error) {
     return res.status(500).json({
       message: "Failed to get lecture",

@@ -37,11 +37,11 @@ const LectureTab = () => {
             setUploadProgress(Math.round((loaded * 100) / total));
           },
         });
-        if (res.data.success) {
+        if (res.data.data) {
           setUploadVideoInfo({videoUrl:res.data.data.url, publicId:res.data.data.public_id})
           setBtnDisable(false);
             toast.success("Video uploaded successfully")
-  console.log("API response:", res.data);
+  console.log("API response:", res);
         } else{
             console.log("success is false:", res.data);
         }
