@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
 import axios from "axios";
 
@@ -37,9 +38,12 @@ const LectureTab = () => {
           },
         });
         if (res.data.success) {
-          setUploadVideoInfo({videUrl:res.data.data.url, publicId:res.data.data.public_id})
+          setUploadVideoInfo({videoUrl:res.data.data.url, publicId:res.data.data.public_id})
           setBtnDisable(false);
-          toast.success(res.data.message)
+            toast.success("Video uploaded successfully")
+  console.log("API response:", res.data);
+        } else{
+            console.log("success is false:", res.data);
         }
         
       } catch (error) {
@@ -54,6 +58,7 @@ const LectureTab = () => {
   };
   return (
     <Card>
+      <Button onClick={() => toast.success("test toast")}>Test Toast</Button>
       <CardHeader>
         <div className="justify-between">
           <CardTitle>Edit Lecture</CardTitle>
@@ -78,12 +83,20 @@ const LectureTab = () => {
           <Label className="my-2">
             Video <span className="text-red-500">*</span>
           </Label>
-          <Input type="file" accept="video/*" className="w-fit" />
+          <Input type="file" onChange={fileChangeHandler} accept="video/*" className="w-fit" />
         </div>
         <div className="flex items-center space-x-2 my-5">
           <Switch id="free-mode" />
           <Label htmlFor="free-mode">Is this Video free</Label>
         </div>
+        {
+          mediaProgress && (
+            <div className="my-4">
+              <Progress value={uploadProgress}/>
+              <p>{uploadProgress}% uploaded</p>
+            </div>
+          )
+        }
         <div className="my-3">
           <Button>Update lecture</Button>
         </div>
