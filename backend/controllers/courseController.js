@@ -193,7 +193,7 @@ export const updateLecture = async (req, res) => {
     if (lectureTitle) lecture.lectureTitle = lectureTitle
     if (videoInfo?.videoUrl) lecture.videoUrl = videoInfo.videoUrl
     if(videoInfo?.publicId) lecture.publicId = videoInfo.publicId
-    if(isPreviewFree) lecture.isPreviewFree = isPreviewFree
+    if(isPreviewFree !== undefined) lecture.isPreviewFree = isPreviewFree
 
     await lecture.save()
 
@@ -259,6 +259,48 @@ export const getLecById = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: "Failed to get lecture",
+    });
+  }
+}
+
+export const togglePublishCourse = async (req, res) => {
+  try {
+    const {courseId} = req.params
+    const {publish} = req.query
+    const course =  await Course.findById(courseId)
+    if (!course) {
+      return res.status(404).json({
+        message:"Course not found"
+      })
+    }
+    // publish status based on query parameter
+    course.isPublished = publish === "true"
+    await course.save()
+    const statusMessage = course.isPublished ? "Published" : "Unpublished"
+    return res.status(200).json({
+      message:` Course is ${statusMessage}`
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to publish lecture",
+    });
+  }
+}
+
+export const getPublishCourse = async (_, res) => {
+  try {
+    const courses = await Course.find({isPublished:true}).populate({path:"creator", select:"name photoUrl"})
+    if (!courses) {
+      return res.status(404).json({
+        message:"Course not found"
+      })
+    }
+    return res.status(200).json({
+      courses,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to get publish courses",
     });
   }
 }

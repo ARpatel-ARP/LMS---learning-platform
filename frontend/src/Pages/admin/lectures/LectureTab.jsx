@@ -103,11 +103,16 @@ const LectureTab = () => {
     }
   }, [isSuccess, error]);
 
-  const { data: lecData, isLoading: LecLoading } =
-    useGetLectureByIdQuery(lectureId);
+  const { data: lecData, isLoading: LecLoading } = useGetLectureByIdQuery(
+    lectureId,
+    {
+      refetchOnMountOrArgChange: true,
+    },
+  );
   const lecture = lecData?.lecture;
   useEffect(() => {
     if (lecData) {
+      console.log("isPreviewFree from API:", lecture.isPreviewFree);
       setLectureTitle(lecture.lectureTitle);
       setIsFree(lecture.isPreviewFree);
       setUploadVideoInfo({
@@ -115,7 +120,7 @@ const LectureTab = () => {
         publicId: lecture.publicId,
       });
     }
-  }, [lecture]);
+  }, [lectureId, lecture]);
   return (
     <Card>
       <CardHeader>

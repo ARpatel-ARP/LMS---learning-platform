@@ -18,6 +18,14 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ["Refetch_Creator_Course", "Refetch_Lecture"],
     }),
+    getPublishCourse: builder.query({
+      query: () => ({
+        url:`/published-courses`,
+        method:"GET",
+      }),
+      providesTags: ["Refetch_Creator_Course"],
+      
+    }),
     getCreatorCourse: builder.query({
       query: () => ({
         url: "/",
@@ -48,36 +56,52 @@ export const courseApi = createApi({
       }),
     }),
     getCourseLecture: builder.query({
-      query:(courseId) => ({
+      query: (courseId) => ({
         url: `/${courseId}/lecture`,
-        method:"GET"
+        method: "GET",
       }),
-      providesTags:['Refetch_Lecture']
+      providesTags: ["Refetch_Lecture"],
     }),
     updateLecture: builder.mutation({
-      query:({lectureTitle, videoInfo, isPreviewFree, courseId, lectureId}) => ({
+      query: ({
+        lectureTitle,
+        videoInfo,
+        isPreviewFree,
+        courseId,
+        lectureId,
+      }) => ({
         url: `/${courseId}/lecture/${lectureId}`,
-        method:"PUT",
-        body:{lectureTitle, videoInfo, isPreviewFree}
-      })
+        method: "PUT",
+        body: { lectureTitle, videoInfo, isPreviewFree },
+      }),
+      invalidatesTags: ["Refetch_Lecture"],
     }),
     removeLecture: builder.mutation({
-      query:(lectureId) => ({
-        url:`/lecture/${lectureId}`,
-        method:"DELETE"
+      query: (lectureId) => ({
+        url: `/lecture/${lectureId}`,
+        method: "DELETE",
       }),
-      invalidatesTags:["Refetch_Lecture"]
+      invalidatesTags: ["Refetch_Lecture"],
     }),
     getLectureById: builder.query({
       query: (lectureId) => ({
-        url:`/lecture/${lectureId}`,
-        method:"GET"
-      })
-    })
+        url: `/lecture/${lectureId}`,
+        method: "GET",
+      }),
+      providesTags: ["Refetch_Lecture"],
+    }),
+    publisheCourse: builder.mutation({
+      query: ({ courseId, query }) => ({
+        url: `/${courseId}/publish?publish=${query}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["Refetch_Creator_Course", "Refetch_Course_Detail"],
+    }),
   }),
 });
 export const {
   useCreateCourseMutation,
+  useGetPublishCourseQuery,
   useGetCreatorCourseQuery,
   useUpdateCourseMutation,
   useGetCourseByIdQuery,
@@ -85,5 +109,6 @@ export const {
   useGetCourseLectureQuery,
   useUpdateLectureMutation,
   useRemoveLectureMutation,
-  useGetLectureByIdQuery
+  useGetLectureByIdQuery,
+  usePublisheCourseMutation,
 } = courseApi;

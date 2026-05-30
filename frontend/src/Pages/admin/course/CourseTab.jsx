@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   useGetCourseByIdQuery,
+  usePublisheCourseMutation,
   useUpdateCourseMutation,
 } from "@/features/api/courseApi";
 
@@ -88,6 +89,8 @@ const CourseTab = () => {
 
   const [updateCourse, { data, isLoading, error, isSuccess }] =
     useUpdateCourseMutation();
+
+    const [publishCourse, {}] = usePublisheCourseMutation()
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log(input);
@@ -105,6 +108,17 @@ const CourseTab = () => {
     await updateCourse({ courseId, formData });
   };
 
+  const publishStatusHandler = async (action) => {
+      try {
+        const response = await publishCourse({courseId, query:action})
+        if (response.data) {
+          toast.success(response.data.message)
+        }
+      } catch (error) {
+        toast.error("Failed to publish or unpublish course")
+      }
+  };
+
   useEffect(() => {
     if (isSuccess) {
       toast.success(data.message || "Course updated");
@@ -114,8 +128,7 @@ const CourseTab = () => {
     }
   }, [isSuccess, error]);
 
-  if(courseByIdLoading) return <Loader2 className="h-4 w-4 animate-spin"/>
-  const isPublished = true;
+  if (courseByIdLoading) return <Loader2 className="h-4 w-4 animate-spin" />;
   return (
     <>
       <Card>
@@ -127,8 +140,18 @@ const CourseTab = () => {
             </CardDescription>
           </div>
           <div className="flex gap-2">
-            <Button variant="outline">
-              {isPublished ? "Unpublished" : "Published"}
+            <Button
+            disabled={courseByIdData?.course?.lectures?.length === 0}
+              variant="outline"
+              onClick={() =>
+                publishStatusHandler(
+                  courseByIdData?.course.isPublished ? "false" : "true",
+                )
+              }
+            >
+              {/* If course is published → passes "false" (unpublish it)
+                 If course is not published → passes "true" (publish it) */}
+              {courseByIdData?.course.isPublished ? "Unpublished" : "Publish"}
             </Button>
             <Button>Remove course</Button>
           </div>
@@ -222,12 +245,12 @@ const CourseTab = () => {
                 className="w-fit"
               />
               {(previewThumbnail || input.courseThumbnail) && (
-                  <img
-                    src={previewThumbnail || input.courseThumbnail}
-                    className="w-37 h-24 object-cover rounded-md my-2"
-                    alt="Course-thumbnail"
-                  />
-                )}
+                <img
+                  src={previewThumbnail || input.courseThumbnail}
+                  className="w-37 h-24 object-cover rounded-md my-2"
+                  alt="Course-thumbnail"
+                />
+              )}
             </div>
             <div className="flex gap-2">
               <Button

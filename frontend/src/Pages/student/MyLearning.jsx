@@ -1,5 +1,5 @@
-import React from 'react';
-import Course from './Course';
+import React from "react";
+import Course from "./Course";
 
 const MyLearningSkeleton = () => {
   return (
@@ -41,7 +41,7 @@ const MyLearningSkeleton = () => {
 
 const MyLearning = () => {
   const isLoading = false;
-  const myLearningCourses = [1,2];
+  const myLearningCourses = [];
 
   return (
     <div className="max-w-4xl mx-auto my-20 px-4 md:px-0">
@@ -49,12 +49,17 @@ const MyLearning = () => {
         MY LEARNING
       </h1>
       <div className="my-5">
-        { isLoading ? <MyLearningSkeleton /> : myLearningCourses.length === 0 ? (
-            <p>You are not enrolled in any courses</p>): 
-         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
-             { [1,2].map((course, i) => <Course key={i}/>)}
-         </div> 
-         }
+        {isLoading ? (
+          <MyLearningSkeleton />
+        ) : myLearningCourses.length === 0 ? (
+          <p>You are not enrolled in any courses</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {[1, 2].map((course, i) => (
+              <Course key={i} course={course} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

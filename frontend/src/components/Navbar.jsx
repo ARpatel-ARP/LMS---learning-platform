@@ -51,9 +51,11 @@ const Navbar = () => {
       <div className="md:flex max-w-7xl mx-auto hidden justify-between p-4">
         <div className="flex gap-2">
           <School size={"30"} />
+          <Link to="/">
           <h1 className="hidden md:block font-extrabold text-2xl">
             E-Learning
           </h1>
+          </Link>
         </div>
         <div className="flex gap-4 items-center">
           {user ? (
