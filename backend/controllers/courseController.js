@@ -183,7 +183,7 @@ export const getCourseLecture = async (req, res) => {
 }
 export const updateLecture = async (req, res) => {
   try {
-    const {lectureTitle, uploadVideoInfo, isFree} = req.body
+    const {lectureTitle, uploadVideoInfo, isPreviewFree} = req.body
     const {courseId, lectureId} = req.params;
     const lecture = await Lecture.findById(lectureId)
     if (!lecture) {
@@ -197,7 +197,7 @@ console.log("uploadVideoInfo:", uploadVideoInfo);
     if (lectureTitle) lecture.lectureTitle = lectureTitle
     if (uploadVideoInfo?.videoUrl) lecture.videoUrl = uploadVideoInfo.videoUrl
     if(uploadVideoInfo?.publicId) lecture.publicId = uploadVideoInfo.publicId
-    if(isFree !== undefined) lecture.isFree = isFree
+    if(isPreviewFree !== undefined) lecture.isPreviewFree = isPreviewFree
 
     await lecture.save()
 
