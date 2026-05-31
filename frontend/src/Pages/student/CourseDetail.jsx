@@ -29,6 +29,12 @@ const CourseDetail = () => {
     (p) => p.courseId?._id === courseId || p.courseId === courseId,
   );
 
+  const handleContinueCourse = async () => {
+    if (isPurchased) {
+      navigate(`/course-progress/${courseId}`)
+    }
+  }
+
   if (isLoading) return <div className="mt-24 text-center">Loading...</div>;
 
   return (
@@ -111,8 +117,8 @@ const CourseDetail = () => {
             <CardFooter>
               {isPurchased ? (
                 <Button
+                onClick={handleContinueCourse}
                   className="w-full"
-                  onClick={() => navigate("/my-learning")}
                 >
                   Continue Course
                 </Button>

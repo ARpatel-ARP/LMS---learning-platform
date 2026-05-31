@@ -19,6 +19,7 @@ import CreateLecture from "./Pages/admin/lectures/CreateLecture";
 import UpdateLecture from "./Pages/admin/lectures/UpdateLecture";
 import CourseDetail from "./Pages/student/CourseDetail";
 import CheckoutPage from "./components/checkout/CheckoutPage";
+import CourseProgress from "./Pages/student/CourseProgress";
 
 const appRouter = createBrowserRouter([
   {
@@ -67,6 +68,14 @@ const appRouter = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <CheckoutPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "course-progress/:courseId",
+        element: (
+          <ProtectedRoute>
+            <CourseProgress />
           </ProtectedRoute>
         ),
       },
