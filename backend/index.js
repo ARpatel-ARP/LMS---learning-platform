@@ -7,6 +7,7 @@ import userRoute from "./routes/user.routes.js"
 import courseRoute from "./routes/course.route.js"
 import mediaRoute from "./routes/media.route.js"
 import cookieParser from 'cookie-parser';
+import paymentRoute from "./routes/payment.route.js" 
 import cors from "cors"
 dotenv.config()
 
@@ -26,6 +27,7 @@ app.use(cookieParser())
 app.use("/api/v1/media", mediaRoute)
 app.use("/api/v1/user", userRoute)
 app.use("/api/v1/course", courseRoute)
+app.use("/api/v1/payment", paymentRoute) 
 // "http://localhost:8000/api/v1/user/register"
 
 connectDB()

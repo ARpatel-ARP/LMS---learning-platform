@@ -2,13 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./rootReducer.js";
 import { authApi } from "@/features/api/authApi.js";
 import { courseApi } from "@/features/api/courseApi.js";
+import { paymentApi } from "@/features/api/paymentApi.js";
 
 export const appStore = configureStore({
-    reducer: rootReducer,
-    middleware:(defaultMidddleware) => defaultMidddleware().concat(authApi.middleware, courseApi.middleware)
-    
-})
+  reducer: rootReducer,
+  middleware: (defaultMidddleware) =>
+    defaultMidddleware().concat(authApi.middleware, courseApi.middleware, paymentApi.middleware ),
+});
 const initializeApp = async () => {
-    await appStore.dispatch(authApi.endpoints.loadUser.initiate({}, {forceRefetch:true}))
-}
-initializeApp()
+  await appStore.dispatch(
+    authApi.endpoints.loadUser.initiate({}, { forceRefetch: true }),
+  );
+};
+initializeApp();

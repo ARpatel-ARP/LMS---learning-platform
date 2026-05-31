@@ -1,27 +1,28 @@
-export default function PaymentStatus({ status, paymentId, error, onRetry }) {
-  if (status === "success") {
+import { Button } from "@/components/ui/button";
+
+export default function PaymentStatus({ isSuccess, paymentId, error, onRetry, onContinue }) {
+  if (isSuccess) {
     return (
-      <div className="text-center space-y-2 py-8">
-        <div className="text-5xl">✅</div>
-        <h2 className="text-xl font-semibold">Payment Successful!</h2>
+      <div className="max-w-md mx-auto mt-28 text-center space-y-3 px-4">
+        <div className="text-6xl">✅</div>
+        <h2 className="text-2xl font-semibold">Payment Successful!</h2>
         <p className="text-muted-foreground text-sm">Payment ID: {paymentId}</p>
         <p className="text-sm text-green-600">You are now enrolled in the course.</p>
+        <Button className="w-full mt-4" onClick={onContinue}>
+          Go to My Learning
+        </Button>
       </div>
     );
   }
 
-  if (status === "failed") {
-    return (
-      <div className="text-center space-y-2 py-8">
-        <div className="text-5xl">❌</div>
-        <h2 className="text-xl font-semibold">Payment Failed</h2>
-        <p className="text-sm text-red-500">{error}</p>
-        <button onClick={onRetry} className="mt-4 text-sm underline text-blue-500">
-          Try Again
-        </button>
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <div className="max-w-md mx-auto mt-28 text-center space-y-3 px-4">
+      <div className="text-6xl">❌</div>
+      <h2 className="text-2xl font-semibold">Payment Failed</h2>
+      <p className="text-sm text-red-500">{error}</p>
+      <Button variant="outline" className="w-full mt-4" onClick={onRetry}>
+        Try Again
+      </Button>
+    </div>
+  );
 }

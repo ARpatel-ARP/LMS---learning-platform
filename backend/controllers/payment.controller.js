@@ -1,13 +1,12 @@
 import { processMockPayment } from "../services/mockGateway.service.js";
-import { CoursePurchase } from "../models/coursePurchase.model.js";
-import Course from "../models/course.model.js";
+import { CoursePurchase } from "../models/purchaseCourse.model.js";  // ✅ correct filename
+import { Course } from "../models/course.model.js";                  // ✅ named export
 
 export const initiatePayment = async (req, res) => {
   try {
     const { amount, cardNumber, cvv, expiry, courseId } = req.body;
-    const userId = req.user._id;
+    const userId = req.id;
 
-    // Check if already purchased
     const alreadyPurchased = await CoursePurchase.findOne({
       userId,
       courseId,
@@ -18,12 +17,10 @@ export const initiatePayment = async (req, res) => {
       return res.status(400).json({ success: false, message: "Course already purchased" });
     }
 
-    // Call mock gateway
     const gatewayResponse = await processMockPayment({ amount, cardNumber, cvv, expiry });
 
     const paymentId = gatewayResponse.transactionId || `MOCK_FAIL_${Date.now()}`;
 
-    // Save to CoursePurchase
     const purchase = await CoursePurchase.create({
       userId,
       courseId,
@@ -36,11 +33,9 @@ export const initiatePayment = async (req, res) => {
       return res.status(402).json({
         success: false,
         message: gatewayResponse.message,
-        purchaseId: purchase._id,
       });
     }
 
-    // Enroll user in course
     await Course.findByIdAndUpdate(courseId, {
       $addToSet: { enrolledStudents: userId },
     });
@@ -49,9 +44,22 @@ export const initiatePayment = async (req, res) => {
       success: true,
       message: "Payment successful. You are now enrolled!",
       paymentId: purchase.paymentId,
-      purchaseId: purchase._id,
     });
 
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// GET /api/v1/payment/my-purchases
+export const getMyPurchases = async (req, res) => {
+  try {
+    const purchases = await CoursePurchase.find({
+      userId: req.id,
+      status: "completed",
+    }).populate("courseId");
+
+    return res.status(200).json({ success: true, purchases });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
