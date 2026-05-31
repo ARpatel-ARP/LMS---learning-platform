@@ -11,3 +11,6 @@ const courseProgressSchema = new mongoose.Schema({
     completed:{type:Boolean},
     lectureProgress:[lectureProgressSchema]
 })
+
+export const CourseProgress = mongoose.model("CourseProgress", courseProgressSchema)
+export const LectureProgress = mongoose.model("LectureProgress", lectureProgressSchema)
