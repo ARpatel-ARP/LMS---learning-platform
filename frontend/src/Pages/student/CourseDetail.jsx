@@ -49,7 +49,7 @@ const CourseDetail = () => {
             inventore. Vero quisquam inventore mollitia?
           </p>
           <div className="my-5">
-            <Card className="md:w-1/2 w-full md:mx-auto ml-3">
+            <Card className="md:w-full md:mx-auto ml-3">
               <CardHeader>
                 <CardTitle className="font-bold text-xl">
                   Course Content
