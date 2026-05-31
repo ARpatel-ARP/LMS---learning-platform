@@ -104,7 +104,9 @@ export const updateCourse = async (req, res) => {
 export const getCourseById = async (req, res) => {
   try {
     const { courseId } = req.params;
-    const course = await Course.findById(courseId);
+    const course = await Course.findById(courseId)
+      .populate("creator", "name")
+      .populate("lectures");
 
     if (!course) {
       return res.status(404).json({
@@ -181,7 +183,7 @@ export const getCourseLecture = async (req, res) => {
 }
 export const updateLecture = async (req, res) => {
   try {
-    const {lectureTitle, videoInfo, isPreviewFree} = req.body
+    const {lectureTitle, uploadVideoInfo, isFree} = req.body
     const {courseId, lectureId} = req.params;
     const lecture = await Lecture.findById(lectureId)
     if (!lecture) {
@@ -189,11 +191,13 @@ export const updateLecture = async (req, res) => {
         message:"Lecture not found"
       })
     }
+    console.log("req.body:", req.body);
+console.log("uploadVideoInfo:", uploadVideoInfo);
     // update lecture
     if (lectureTitle) lecture.lectureTitle = lectureTitle
-    if (videoInfo?.videoUrl) lecture.videoUrl = videoInfo.videoUrl
-    if(videoInfo?.publicId) lecture.publicId = videoInfo.publicId
-    if(isPreviewFree !== undefined) lecture.isPreviewFree = isPreviewFree
+    if (uploadVideoInfo?.videoUrl) lecture.videoUrl = uploadVideoInfo.videoUrl
+    if(uploadVideoInfo?.publicId) lecture.publicId = uploadVideoInfo.publicId
+    if(isFree !== undefined) lecture.isFree = isFree
 
     await lecture.save()
 
