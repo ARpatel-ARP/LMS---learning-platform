@@ -60,9 +60,9 @@ const appRouter = createBrowserRouter([
       {
         path: "course-detail/:courseId",
         element: (
-          <ProtectedRoute>
+      
             <CourseDetail />
-          </ProtectedRoute>
+        
         ),
       },
       // admin routes start from here

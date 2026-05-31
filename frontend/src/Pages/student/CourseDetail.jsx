@@ -1,16 +1,63 @@
-import React from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { BadgeInfo, Lock, PlayCircle } from "lucide-react";
+import React from "react";
 
 const CourseDetail = () => {
   return (
-    <div className='mt-24 space-y-5'>
-        <div className="text-white bg-[#2D2F31]">
-            <div className='max-w-7xl mx-auto py-8 px-4 md:px-8 flex flex-col gap-2'>
-                <h1 className='font-bold text-3xl '>Course Title</h1>
-            </div>
+    <div className="mt-24 space-y-5">
+      <div className="text-white bg-[#170818]">
+        <div className="max-w-7xl md:mx-22 py-8 px-4 flex flex-col gap-2">
+          <h1 className="font-bold text-3xl ">Course Title</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
+            rem maiores ipsam?
+          </p>
+          <span>Created By : <span className="italic underline cursor-pointer">RAUT-stack</span> </span>
+          <div className="flex items-center gap-2 text-sm">
+            <BadgeInfo size={16}/>
+            <p className="italic font-light">Last updated 2026-3-14</p>
+          </div>
+          <p>Students enrolled: 1</p>
         </div>
-      
+      </div>
+
+      <div className="flex flex-col lg:flex-row justify-between max-w-7xl">
+        <div className=" m-5 lg:mx-15 lg:px-10 w-[85%] lg:w-1/2 ">
+          <h1 className="text-2xl font-bold mb-3">Description</h1>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Consequatur vitae nihil magnam omnis sit porro obcaecati maxime
+            quas? Eligendi, a? Nostrum laboriosam fuga provident. Quod eveniet
+            maiores officiis. Quod suscipit iure nam laborum quidem! Ut est
+            repellendus, doloremque dolor repellat nemo vero quo harum a
+            inventore. Vero quisquam inventore mollitia?
+          </p>
+          <div className="my-5">
+            <Card className="p-3">
+              <CardHeader> 
+              <CardTitle className="font-bold text-xl">Course Content</CardTitle>
+              <CardDescription className="px-1">no of lectures</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+            {
+                [1,2,3].map((lecture, idx) => (
+                  <div key={idx}>
+                    <span>
+                        {
+                            true ? (<PlayCircle size={14}/>) : <Lock size={14}/>
+                        }
+                    </span>
+                  </div>
+                )
+                )
+            }
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default CourseDetail;
