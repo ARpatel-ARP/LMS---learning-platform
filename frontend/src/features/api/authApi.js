@@ -28,35 +28,36 @@ export const authApi = createApi({
           const result = await queryFulfilled;
           dispatch(userLoggedIn({ user: result.data.user }));
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       },
     }),
     logoutUser: builder.mutation({
       query: () => ({
-        url:"logout",
-        method:"POST"
+        url: "logout",
+        method: "POST",
       }),
-      async onQueryStarted(_, { queryFulfilled, dispatch }) {  // ← add this
-    try {
-      await queryFulfilled;
-      dispatch(userLoggedOut());  // ← clears user from Redux state
-    } catch (error) {
-      console.log(error)
-    }
-  }
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
+        // ← add this
+        try {
+          await queryFulfilled;
+          dispatch(userLoggedOut()); // ← clears user from Redux state
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
     loadUser: builder.query({
       query: () => ({
         url: "profile",
-        method: "GET"
+        method: "GET",
       }),
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
           dispatch(userLoggedIn({ user: result.data.user }));
         } catch (error) {
-          dispatch(userLoggedOut()) 
+          dispatch(userLoggedOut());
         }
       },
     }),
@@ -65,11 +66,16 @@ export const authApi = createApi({
         url: "profile/update",
         method: "PUT",
         body: formData,
-        credentials: "include"
-      })
-
-    })
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation, useLoadUserQuery, useUpdateUserMutation, useLogoutUserMutation } = authApi;
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useLoadUserQuery,
+  useUpdateUserMutation,
+  useLogoutUserMutation,
+} = authApi;
