@@ -1,7 +1,10 @@
+import BuyCourseBtn from "@/components/BuyCourseBtn";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -10,6 +13,7 @@ import { BadgeInfo, Lock, PlayCircle } from "lucide-react";
 import React from "react";
 
 const CourseDetail = () => {
+    const purchaseCourse = true;
   return (
     <div className="mt-24 space-y-5">
       <div className="text-white bg-[#170818]">
@@ -73,10 +77,16 @@ const CourseDetail = () => {
                         <div className="w-full aspect-video mb-4">
                             Video
                         </div>
-                        <h1>Lecture title</h1>
+                        <h1 className="text-lg">Lecture title</h1>
                         <Separator className="my-2"/>
-                        <h1 className=""></h1>
+                        <h1 className="text-lg md:text-xl font-semibold">Course Price</h1>
                     </CardContent>
+                    <CardFooter>
+                        {
+                            purchaseCourse ? ( <Button className="w-full">Continue Course</Button>) : (<BuyCourseBtn/>)
+                        }
+                        
+                    </CardFooter>
                 </Card>
         </div>
       </div>
