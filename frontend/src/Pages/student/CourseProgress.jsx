@@ -1,49 +1,58 @@
-import { Button } from '@/components/ui/button';
-import {Card, CardContent, CardFooter } from '@/components/ui/card';
-import React from 'react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import { Badge, BadgeCheck, CheckCircle, CirclePlay, TypeOutline } from "lucide-react";
+import React from "react";
 
 const CourseProgress = () => {
-    const isCompleted = true
+  const isCompleted = true;
   return (
-    <div className='max-w-7xl mx-auto p-4 mt-25'>
-        {/* Display Course name */}
-    <div className='flex justify-between mb-5'>
-        <h1 className='font-bold text-2xl'>Course Title</h1>
+    <div className="max-w-7xl mx-auto p-4 mt-25">
+      {/* Display Course name */}
+      <div className="flex justify-between mb-5">
+        <h1 className="font-bold text-2xl">Course Title</h1>
         <Button>Mark as Completed</Button>
-    </div>
-    <div className='w-full mt-10 flex gap-x-10 flex-col md:flex-row'>
-        <div className='w-1/2'>
-            <Card>
-                <CardContent>
-
-                </CardContent>
-            </Card>
-            {/* Display current watching lecture title */}
-            <div className='mt-2'>
-           <h3 className='font-medium text-lg'>Lecture-1: Introduction</h3>
-            </div>
+      </div>
+      <div className="w-full mt-10 flex gap-x-10 flex-col md:flex-row">
+        <div className="w-1/2">
+          <Card>
+            <CardContent></CardContent>
+          </Card>
+          {/* Display current watching lecture title */}
+          <div className="mt-2">
+            <h3 className="font-medium text-lg">Lecture-1: Introduction</h3>
+          </div>
         </div>
         {/* Lecture Sidebar */}
-        <div className='md:w-2/5 flex flex-col w-full border-t md:border-t-0 md:border-l border-gray-200 md:pl-4 pt-4 md:pt-0'>
-        <h2 className='font-semibold text-xl mb-4'>Course lectures</h2>
-        <div className='flex-1 max-h-70 overflow-y-auto  [&::-webkit-scrollbar]:hidden [scrollbar-width:none] '>
-          { 
-           [1,2,3,4].map((lecture, idx) => (
-            <Card key={idx} className="mb-3 hover:cursor-pointer transition transform">
+        <div className="md:w-2/5 flex flex-col w-full border-t md:border-t-0 md:border-l border-gray-200 md:pl-4 pt-4 md:pt-0">
+          <h2 className="font-semibold text-xl mb-4">Course lectures</h2>
+          <div className="flex-1 max-h-70 overflow-y-auto  [&::-webkit-scrollbar]:hidden [scrollbar-width:none] ">
+            {[1, 2, 3, 4].map((lecture, idx) => (
+              <Card
+                key={idx}
+                className="mb-3 hover:cursor-pointer transition transform"
+              >
                 <CardContent className="flex items-center justify-between p-4">
-                    <div className='flex items-center'>
-
+                  <div className="flex items-center">
+                    {isCompleted ? (
+                      <CheckCircle size={24} className="text-green-400 mr-2" />
+                    ) : (
+                      <CirclePlay size={24} className="text-gray-500 mr-2" />
+                    )}
+                    <div>
+                        <CardTitle className="text-lg font-medium">Introduction</CardTitle>
                     </div>
-
+                  </div>{
+                    isCompleted ? (<Button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold">Completed</Button>) : (<Button disabled variant="outline">Pending</Button>) 
+                  }
+                 
                 </CardContent>
-            </Card>
-          ))
-          }
+              </Card>
+            ))}
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
     </div>
   );
-}
+};
 
 export default CourseProgress;
