@@ -30,8 +30,6 @@ app.use("/api/v1/user", userRoute)
 app.use("/api/v1/course", courseRoute)
 app.use("/api/v1/payment", paymentRoute) 
 app.use("/api/v1/progress", progressRoute)
-app.use("/api/v1/progress", progressRoute)
-app.use("/api/v1/progress", progressRoute)
 // "http://localhost:8000/api/v1/user/register"
 
 connectDB()
