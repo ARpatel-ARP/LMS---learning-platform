@@ -9,8 +9,6 @@ export const processMockPayment = ({ amount, cardNumber, cvv, expiry }) => {
       }
       // 10% random failure
       const isSuccess = Math.random() > 0.1;
-      const isSuccess = Math.random() > 0.1;
-      const isSuccess = Math.random() > 0.1;
       if (isSuccess) {
         resolve({
           success: true,
