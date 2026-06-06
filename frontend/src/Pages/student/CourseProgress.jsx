@@ -52,7 +52,9 @@ const CourseProgress = () => {
           </Card>
           {/* Display current watching lecture title */}
           <div className="mt-2">
-            <h3 className="font-medium text-lg">Lecture-1: Introduction</h3>
+            <h3 className="font-medium text-lg">
+              {`Lecture ${courseDetail.lectures.findIndex((lec) => lec._id == (currentLecture?._id || intialLecture?._id)) + 1}`}{" "}
+            </h3>
           </div>
         </div>
         {/* Lecture Sidebar */}
