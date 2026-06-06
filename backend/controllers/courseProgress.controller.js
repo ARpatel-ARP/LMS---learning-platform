@@ -7,7 +7,7 @@ export const getCourseProgress = async (req, res) => {
         const userId = req.body
         // Step-1 fetch the user's course progress
         const courseProgress = await CourseProgress.findOne({courseId, userId}).populate("courseId")
-        const courseDetail = await Course.findById(courseId)
+        const courseDetail = await Course.findById(courseId).populate("lectures")
 
         if (!courseDetail) {
             return res.status(404).json({
