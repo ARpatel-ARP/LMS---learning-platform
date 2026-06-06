@@ -23,7 +23,6 @@ const Course = ({course}) => {
               <AvatarImage
                 src={ course.creator.photoUrl || "https://github.com/shadcn.png"}
                 alt="@shadcn"
-                className="grayscale"
               />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
@@ -34,7 +33,7 @@ const Course = ({course}) => {
           </Badge>
         </div>
         <div className=" text-white font-bold text-center text-2xl">
-          <span>{course.coursePrice}</span>
+          <span>₹{course.coursePrice}</span>
         </div>
       </CardContent>
     </Card>
