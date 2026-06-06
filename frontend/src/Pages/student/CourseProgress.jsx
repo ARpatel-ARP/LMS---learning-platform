@@ -30,7 +30,13 @@ const CourseProgress = () => {
   const intialLecture =
     currentLecture || (courseDetail.lectures && courseDetail.lectures[0]);
 
-  const isCompleted = true;
+    const isLecCompleted = (lectureId) => {
+      // if the lectureid and prog viewed is equal or true then isLecCompl is true
+      return progress.some((prog) => prog.lectureId === lectureId && prog.viewed 
+      )
+    }
+    
+
   return (
     <div className="max-w-7xl mx-auto p-4 mt-25">
       {/* Display Course name */}
@@ -53,7 +59,7 @@ const CourseProgress = () => {
           {/* Display current watching lecture title */}
           <div className="mt-2">
             <h3 className="font-medium text-lg">
-              {`Lecture ${courseDetail.lectures.findIndex((lec) => lec._id == (currentLecture?._id || intialLecture?._id)) + 1}`}{" "}
+              {`Lecture ${courseDetail.lectures.findIndex((lec) => lec._id == (currentLecture?._id || intialLecture._id)) + 1} : ${currentLecture?.lectureTitle || intialLecture.lectureTitle}`}
             </h3>
           </div>
         </div>
@@ -68,7 +74,7 @@ const CourseProgress = () => {
               >
                 <CardContent className="flex items-center justify-between p-4">
                   <div className="flex items-center">
-                    {isCompleted ? (
+                    {completed ? (
                       <CheckCircle size={24} className="text-green-400 mr-2" />
                     ) : (
                       <CirclePlay size={24} className="text-gray-500 mr-2" />
@@ -79,13 +85,9 @@ const CourseProgress = () => {
                       </CardTitle>
                     </div>
                   </div>
-                  {isCompleted ? (
+                  {isLecCompleted(lecture._id) && (
                     <Button className="bg-green-300 hover:bg-green-400 text-green-900 font-semibold">
                       Completed
-                    </Button>
-                  ) : (
-                    <Button disabled variant="outline">
-                      Pending
                     </Button>
                   )}
                 </CardContent>
