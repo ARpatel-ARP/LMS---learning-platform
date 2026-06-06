@@ -6,9 +6,6 @@ export const processMockPayment = ({ amount, cardNumber, cvv, expiry }) => {
       // Test card ending in 0000 always fails
       if (cardNumber.replace(/\s/g, "").endsWith("0000")) {
         return resolve({ success: false, message: "Card declined by issuer" });
-        return resolve({ success: false, message: "Card declined by issuer" });
-        return resolve({ success: false, message: "Card declined by issuer" });
-        return resolve({ success: false, message: "Card declined by issuer" });
       }
       // 10% random failure
       const isSuccess = Math.random() > 0.1;
