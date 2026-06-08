@@ -1,4 +1,5 @@
   import { Course } from "../models/course.model.js";
+  import {CourseProgress} from "../models/courseProgress.model.js"
   import { Lecture } from "../models/lecture.model.js";
   import { deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
 
@@ -149,6 +150,12 @@
       
         course.lectures.push(lecture._id)
         await course.save()
+
+        // update courseprogress after adding new lecture
+        await CourseProgress.updateMany(
+      { courseId, completed: true },
+      { $set: { completed: false } }
+    );
 
       return res.status(201).json({
         lecture,

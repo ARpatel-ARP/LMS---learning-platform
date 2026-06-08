@@ -20,6 +20,7 @@ import UpdateLecture from "./Pages/admin/lectures/UpdateLecture";
 import CourseDetail from "./Pages/student/CourseDetail";
 import CheckoutPage from "./components/checkout/CheckoutPage";
 import CourseProgress from "./Pages/student/CourseProgress";
+import SearchPage from "./Pages/student/SearchPage";
 
 const appRouter = createBrowserRouter([
   {
@@ -56,6 +57,14 @@ const appRouter = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "course/search",
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
           </ProtectedRoute>
         ),
       },

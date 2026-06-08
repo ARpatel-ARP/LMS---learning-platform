@@ -7,8 +7,9 @@ import {
   useUpdateLectureProgMutation,
 } from "@/features/api/courseProgressApi";
 import { CheckCircle, CirclePlay } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const CourseProgress = () => {
   const [currentLecture, setCurrentLecture] = useState(null);
@@ -17,8 +18,18 @@ const CourseProgress = () => {
 
   const { data, isLoading, refetch, isError } = useGetCourseProgressQuery(courseId);
   const [updatedLectureProgress] = useUpdateLectureProgMutation();
-  const [completeCourse] = useCompleteCourseMutation();
-  const [incompleteCourse] = useIncompleteCourseMutation();
+  const [completeCourse, {data:markComplData, isSucces:ComplSuccess}] = useCompleteCourseMutation();
+  const [incompleteCourse, {data:markInComplData, isSucces:InComplSuccess}] = useIncompleteCourseMutation();
+  
+    useEffect(() => {
+       if (ComplSuccess) {
+        toast.success(markComplData.message)
+      }
+      if (InComplSuccess) {
+        toast.success(markInComplData.message)
+      }
+        
+    }, [ComplSuccess, InComplSuccess]);
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Failed to load</p>;
@@ -35,15 +46,16 @@ const CourseProgress = () => {
         prog.lectureId.toString() === lectureId.toString() && prog.viewed 
     );
   };
-
-  const handleLecSelect = (lecture) => {
-    setCurrentLecture(lecture);
-  };
-
   const handleLectureProgress = async (lectureId) => {
     await updatedLectureProgress({ courseId, lectureId });
     await refetch();
   };
+
+  const handleLecSelect = (lecture) => {
+    setCurrentLecture(lecture);
+    handleLectureProgress(lecture._id)
+  };
+
 
   const handleCompleteCourse = async () => {
     await completeCourse(courseId);
