@@ -10,4 +10,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  optimizeDeps: {
+    include: [
+      'recharts',
+      'recharts/es6/component/DefaultLegendContent',
+    ],
+  },
+  build: {
+    commonjsOptions: {
+      include: [/recharts/, /node_modules/],
+    },
+  },
 })
