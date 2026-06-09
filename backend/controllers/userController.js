@@ -96,7 +96,16 @@ export const logout = async (req, res) => {
 export const getUserProfile = async (req, res) => {
   try {
     const userId = req.id;
-    const user = await User.findById(userId).select("-password");
+    const user = await User.findById(userId)
+      .select("-password")
+      .populate({
+        path: "enrolledCourses",
+        populate: {
+          path: "creator",
+          select: "name photoUrl",
+        },
+      });
+    console.log("USER ENROLLED →", user.enrolledCourses);
     if (!user) {
       return res.status(404).json({
         message: "Profile not found",
@@ -117,14 +126,14 @@ export const getUserProfile = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    const userId = req.id
-    const {name} = req.body
-    const profilePhoto = req.file
-          console.log("userId:", userId)
-    console.log("name:", name)
-    console.log("profilePhoto:", profilePhoto)
-    const user = await User.findById(userId)
-     if (!user) {
+    const userId = req.id;
+    const { name } = req.body;
+    const profilePhoto = req.file;
+    console.log("userId:", userId);
+    console.log("name:", name);
+    console.log("profilePhoto:", profilePhoto);
+    const user = await User.findById(userId);
+    if (!user) {
       return res.status(404).json({
         message: "Profile not found",
         success: false,
@@ -132,26 +141,27 @@ export const updateProfile = async (req, res) => {
     }
     // EXTRACT PUBLIC ID OF THE OLD IMAGE FROM THE URL DOES ITS EXISTS
     if (user.photoUrl) {
-      const publicId =  user.photoUrl.split("/").pop().split(".")[0] //extract publicId
-      deleteMediaFromCloudinary(publicId)
+      const publicId = user.photoUrl.split("/").pop().split(".")[0]; //extract publicId
+      deleteMediaFromCloudinary(publicId);
     }
     // UPLOAD NEW PHOTO
-    const cloudResponse = await uploadMedia(profilePhoto.path)
-    const photoUrl = cloudResponse.secure_url
+    const cloudResponse = await uploadMedia(profilePhoto.path);
+    const photoUrl = cloudResponse.secure_url;
 
-    const updateData = {name, photoUrl}
-    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {new:true}).select("-password")
+    const updateData = { name, photoUrl };
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
+    }).select("-password");
 
     return res.status(200).json({
-      success:true,
-      user:updatedUser,
-      message:"Profile updated successfully"
-    })
-
+      success: true,
+      user: updatedUser,
+      message: "Profile updated successfully",
+    });
   } catch (error) {
-     return res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Failed to update profile",
     });
   }
-}
+};

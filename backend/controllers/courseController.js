@@ -327,10 +327,6 @@ export const searchCourse = async (req, res) => {
   try {
     const { query = "", categories = "", sortByPrice = "" } = req.query;
     console.log("REQ QUERY →", req.query);
-
-    if (!query || query.trim() === "") {
-      return res.status(200).json({ success: true, courses: [] });
-    }
     // convert to array
     const categoriesArray = categories
       ? categories
@@ -349,7 +345,9 @@ export const searchCourse = async (req, res) => {
     };
 
     if (categoriesArray.length > 0) {
-      searchCriteria.category = { $in: categoriesArray };
+      searchCriteria.category = {
+    $in: categoriesArray.map((cat) => new RegExp(`^${cat}$`, "i"))
+  };
     }
 
     const sortOptions = {};
