@@ -149,29 +149,43 @@ const MobileNavbar = () => {
             // ← show these only when logged in
             <>
               <Button variant="outline" asChild>
-                <Link to="/my-learning">My Learning</Link>
+                <SheetClose asChild>
+                <Link to="/">Home</Link>
+                </SheetClose>
               </Button>
               <Button variant="outline" asChild>
+                <SheetClose asChild>
+                <Link to="/my-learning">My Learning</Link>
+                </SheetClose>
+              </Button>
+              <Button variant="outline" asChild>
+                <SheetClose asChild>
                 <Link to="/profile">Edit Profile</Link>
+                </SheetClose>
               </Button>
               <Button variant="outline" onClick={logoutHandler}>Log out</Button>
             </>
           ) : !isLoginPage && (
             <>
               <Button variant="outline" asChild>
+                <SheetClose asChild>
                 <Link to="/login">Login</Link>
+            </SheetClose>
               </Button>
               <Button asChild>
+                <SheetClose asChild>
                 <Link to="/signup">Signup</Link>
+            </SheetClose>
               </Button>
             </>
           )}
         </nav>
         {user?.role === "instructor" && (
-          <SheetClose asChild>
             <Button type="submit">
-              <Link to="dashboard">Dashboard</Link></Button>
-          </SheetClose>
+            <SheetClose asChild>
+              <Link to="/admin/dashboard">Dashboard</Link>
+            </SheetClose>
+              </Button>
         )}
       </SheetContent>
     </Sheet>

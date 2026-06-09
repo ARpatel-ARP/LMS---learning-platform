@@ -1,6 +1,7 @@
 
+import { useGetMyPurchasesQuery } from "@/features/api/paymentApi";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }) => {
   const {isAuthenticated } = useSelector((state) => state.auth)
@@ -31,3 +32,19 @@ export const AdminRoute =  ({ children }) => {
   }
   return children
 }
+export const PurchasedRoute = ({ children }) => {
+  const { courseId } = useParams();
+  const { data, isLoading } = useGetMyPurchasesQuery();
+
+  if (isLoading) return null;
+
+  const hasPurchased = data?.purchases?.some(
+    (p) => p.courseId?._id === courseId || p.courseId === courseId
+  );
+
+  if (!hasPurchased) {
+    return <Navigate to={`/course-detail/${courseId}`} replace />;
+  }
+
+  return children;
+};

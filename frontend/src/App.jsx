@@ -7,8 +7,7 @@ import MainLayout from "./layout/MainLayout";
 import Courses from "./Pages/student/Courses";
 import MyLearning from "./Pages/student/MyLearning";
 import Profile from "./Pages/student/Profile";
-import ProtectedRoute from "./components/ProtectedRoute";
-import AuthRoute from "./components/AuthRoute";
+import { ProtectedRoute, AdminRoute, AuthenticatedUser, PurchasedRoute } from "./components/ProtectedRoute";
 import Sidebar from "./Pages/admin/Sidebar.jsx";
 import Dashboard from "./Pages/admin/Dashboard";
 import Course from "./Pages/student/Course";
@@ -39,9 +38,9 @@ const appRouter = createBrowserRouter([
       {
         path: "login",
         element: (
-          <AuthRoute>
+          <AuthenticatedUser>
             <Login />
-          </AuthRoute>
+          </AuthenticatedUser>
         ),
       },
       {
@@ -84,19 +83,25 @@ const appRouter = createBrowserRouter([
         path: "course-progress/:courseId",
         element: (
           <ProtectedRoute>
+            <PurchasedRoute>
             <CourseProgress />
+          </PurchasedRoute>
           </ProtectedRoute>
         ),
       },
 
-      // admin routes start from here
+      // admin routes
       {
         path: "admin",
-        element: <Sidebar />,
+        element: (
+          <AdminRoute>
+            <Sidebar />
+          </AdminRoute>
+        ),
         children: [
           {
             path: "dashboard",
-            element: <Dashboard />,
+            element: <Dashboard />,  // AdminRoute on parent already protects this
           },
           {
             path: "course",

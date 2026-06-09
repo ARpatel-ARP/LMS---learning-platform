@@ -1,6 +1,7 @@
 import React from "react";
 import Course from "./Course";
 import { useGetMyPurchasesQuery } from "@/features/api/paymentApi";
+import { Link } from "react-router-dom";
 
 const MyLearningSkeleton = () => (
   <div className="flex flex-col gap-4">
@@ -16,7 +17,7 @@ const MyLearningSkeleton = () => (
   </div>
 );
 
-const MyLearning = () => {
+const MyLearning = ({course}) => {
   const { data, isLoading } = useGetMyPurchasesQuery();
   const myLearningCourses = data?.purchases?.map((p) => p.courseId) || [];
   console.log(myLearningCourses);
@@ -35,7 +36,9 @@ const MyLearning = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {myLearningCourses.map((course, i) => (
+              <Link to={`course-detail/${course._id}`}>
               <Course key={i} course={course} />
+              </Link>
             ))}
           </div>
         )}

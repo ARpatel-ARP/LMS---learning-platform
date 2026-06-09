@@ -37,7 +37,7 @@ const Dashboard = () => {
   const totalRevenue = chartData.reduce((sum, c) => sum + c.price, 0);
 
   return (
-    <div className="space-y-8 p-2">
+    <div className="space-y-8 p-2 md:mt-0 mt-20">
       {/* Stat Cards */}
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="py-6 hover:shadow-zinc-400 dark:hover:shadow-zinc-900 dark:shadow-xl transition-all duration-300 shadow-xl">
