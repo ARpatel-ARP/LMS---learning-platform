@@ -318,3 +318,25 @@
       });
     }
   }
+  export const searchCourse = async (req, res) => {
+    try {
+      const {query="", categories = [], sortByPrice = ""} = req.query;
+
+      const searchCriteria = {
+        isPublished:true,
+        $or:[ // regex does partial matching (like SQL LIKE), 
+              // and $options: "i" makes it case-insensitive so "React" matches "react", "REACT", etc.
+          {courseTitle:{$regex:query, $options:"i"}},
+          {subTitle:{$regex:query, $options:"i"}},
+          {category:{$regex:query, $options:"i"}},
+
+        ]
+      }
+      if (categories.length > 0) {
+        searchCriteria.category = {$in: categories}
+      }
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
