@@ -60,8 +60,8 @@ const CourseDetail = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row justify-between max-w-[95%]">
-        <div className="md:m-5 mx-auto lg:mx-15 lg:px-10 w-[85%] lg:w-4/5">
-          <h1 className="text-2xl font-bold mb-3">Description</h1>
+        <div className="md:m-5 mx-auto lg:mx-15 lg:px-10 w-[85%] lg:w-4/5 flex-1 items-center md:items-stretch">
+          <h1 className="text-2xl font-bold mb-3 md:ml-1 ml-25">Description</h1>
           <p>{course?.description}</p>
 
           <div className="my-5">

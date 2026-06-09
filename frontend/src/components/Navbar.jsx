@@ -82,7 +82,7 @@ const Navbar = () => {
                 <DropdownMenuItem onClick={logoutHandler}>Log out</DropdownMenuItem>
                 {
                   user.role === "instructor" && (
-                    <DropdownMenuItem><Link to="admin">Dashboard</Link></DropdownMenuItem>
+                    <DropdownMenuItem><Link to="admin/dashboard">Dashboard</Link></DropdownMenuItem>
                   )
                 }
               </DropdownMenuContent>

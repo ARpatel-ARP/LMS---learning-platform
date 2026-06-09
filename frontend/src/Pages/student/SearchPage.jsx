@@ -12,10 +12,10 @@ const SearchPage = () => {
   const [selectedCategories, setSelectedCategorires] = useState([]);
   const [sortByPrice, setSortByPrice] = useState("");
   const { data, isLoading } = useGetSearchCoursesQuery({
-    searchQuery: query || "",
+    searchQuery: query,
     categories: selectedCategories,
     sortByPrice,
-  }, {skip: !query} );
+  });
   const isEmpty = !isLoading && data?.courses?.length === 0;
 
   const handleFilterChange = async (categories, price) => {
@@ -24,7 +24,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="max-7-xl mx-auto p-4 md:p-8 mt-10">
+    <div className="max-w-7-xl mx-auto p-4 md:p-8 md:ml-10 mt-10">
       <div className="my-6">
         <h1 className="font-bold text-2xl">Results for "{query}"</h1>
         <p>
@@ -34,7 +34,7 @@ const SearchPage = () => {
       </div>
       <div className="flex flex-col md:flex-row gap-10">
         <Filter handleFilterChange={handleFilterChange} />
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col items-center md:items-stretch">
           {isLoading ? (
             Array.from({ length: 3 }).map((_, idx) => (
               <CourseSkeleton key={idx} />

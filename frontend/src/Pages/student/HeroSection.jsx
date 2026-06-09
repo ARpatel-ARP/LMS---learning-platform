@@ -30,7 +30,7 @@ const HeroSection = () => {
             Search
           </Button>
         </form>
-        <Button className="rounded-full p-3 py-5 mt-3 bg-white text-black hover:bg-gray-900 hover:text-white">Explore Courses</Button>
+        <Button onClick={()=> navigate(`/course/search?query`)} className="rounded-full p-3 py-5 mt-3 bg-white text-black hover:bg-gray-900 hover:text-white">Explore Courses</Button>
       </div>
       </div>
 
