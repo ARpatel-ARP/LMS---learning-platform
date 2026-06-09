@@ -19,23 +19,29 @@ export const courseApi = createApi({
       invalidatesTags: ["Refetch_Creator_Course", "Refetch_Lecture"],
     }),
     getSearchCourses: builder.query({
-      query:({searchQeury, categories,sortByprice }) => {
-        let qeuryString = `/search/query=${encodeURIComponent(searchQeury)}`
-        // append category 
-        if (categories && categories.length > 0 ) {
-          const categoriesString = categories.map(encodeURIComponent).join(",") 
-          qeuryString += `&categories=${categoriesString}`
+      query: ({ searchQeury, categories, sortByprice }) => {
+        let qeuryString = `/search/query=${encodeURIComponent(searchQeury)}`;
+        // append category
+        if (categories && categories.length > 0) {
+          const categoriesString = categories.map(encodeURIComponent).join(",");
+          qeuryString += `&categories=${categoriesString}`;
         }
-      }
-      
+        // append shortByprice
+        if (sortByprice) {
+          qeuryString += `&sortByPrice=${encodeURIComponent(sortByprice``)}`;
+        }
+        return {
+          url: qeuryString,
+          method: "GET",
+        };
+      },
     }),
     getPublishCourse: builder.query({
       query: () => ({
-        url:`/published-courses`,
-        method:"GET",
+        url: `/published-courses`,
+        method: "GET",
       }),
       providesTags: ["Refetch_Creator_Course"],
-      
     }),
     getCreatorCourse: builder.query({
       query: () => ({
@@ -112,6 +118,7 @@ export const courseApi = createApi({
 });
 export const {
   useCreateCourseMutation,
+  useGetSearchCoursesQuery,
   useGetPublishCourseQuery,
   useGetCreatorCourseQuery,
   useUpdateCourseMutation,

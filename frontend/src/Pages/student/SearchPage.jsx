@@ -3,10 +3,10 @@ import Filter from './Filter';
 import SearchResult from './SearchResult';
 import { SearchX } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useGetSearchCoursesQuery } from '@/features/api/courseApi';
 
 const SearchPage = () => {
-    const isLoading = false;
-    const isEmpty = false;
+  const {data, isLoading} = useGetSearchCoursesQuery()
   return (
     <div className='max-7-xl mx-auto p-4 md:p-8 mt-10'>
         <div className="my-6">
