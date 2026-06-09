@@ -38,8 +38,8 @@ const CourseDetail = () => {
   if (isLoading) return <div className="mt-24 text-center">Loading...</div>;
 
   return (
-    <div className="mt-24 space-y-5">
-      <div className="text-white bg-[#170818]">
+    <div className="mt-24 space-y-5 ">
+      <div className="text-white bg-gradient-to-r from-cyan-700 via-cyan-100 to-white dark:from-cyan-950 dark:via-zinc-950 dark:to-zinc-950 dark:bg-cyan-950">
         <div className="max-w-7xl md:mx-22 py-8 px-4 flex flex-col gap-2">
           <h1 className="font-bold text-3xl">{course?.courseTitle}</h1>
           <p>{course?.subTitle}</p>
@@ -65,7 +65,7 @@ const CourseDetail = () => {
           <p>{course?.description}</p>
 
           <div className="my-5">
-            <Card className="md:w-full md:mx-auto ml-3">
+            <Card className="md:w-full md:mx-auto ml-3 border dark:shadow-[#FAF0E6] dark:shadow-0 shadow-2xl">
               <CardHeader>
                 <CardTitle className="font-bold text-xl">
                   Course Content
@@ -93,7 +93,7 @@ const CourseDetail = () => {
         </div>
 
         <div className="w-full lg:w-1/3">
-          <Card className="md:w-3/4 md:mx-35 ml-5 mb-5">
+          <Card className="md:w-3/4 md:mx-35 ml-5 mb-5 dark:shadow-[#FAF0E6] dark:shadow-0 shadow-2xl dark:bg-zinc-900">
             <CardContent className="p-4 flex flex-col">
               <div className="w-full aspect-video mb-4 bg-slate-100 dark:bg-slate-800 rounded overflow-hidden">
                 {course?.lectures?.[0]?.videoUrl && (

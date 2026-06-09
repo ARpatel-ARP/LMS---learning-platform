@@ -46,7 +46,7 @@ const Navbar = () => {
     }
   }, [isSuccess])
   return (
-    <div className="h-16 w-full bg-[#FAF0E6] dark:bg-[#0A0A0A] border-b dark:border-b-gray-800 border-b-gray-200 fixed top-0 left-0 ring-0 duration-300 z-10 ">
+    <div className="h-16 w-full bg-gray-100/70 dark:bg-[#0A0A0A] border-b dark:border-b-gray-800 border-b-gray-200 fixed top-0 left-0 ring-0 duration-300 z-10 ">
       {/* Desktop */}
       <div className="md:flex max-w-7xl mx-auto hidden justify-between p-4">
         <div className="flex gap-2">
