@@ -1,5 +1,5 @@
 import express from "express"
-import { createCourse, createLecture, getCourseById, getCourseLecture, getCreatorCourse, getLecById, getPublishCourse, removeLecture, togglePublishCourse, updateCourse, updateLecture } from "../controllers/courseController.js"
+import { createCourse, createLecture, getCourseById, getCourseLecture, getCreatorCourse, getLecById, getPublishCourse, removeLecture, searchCourse, togglePublishCourse, updateCourse, updateLecture } from "../controllers/courseController.js"
 import isAuthenticated from "../middlewares/isAuthenticated.js"
 import upload from "../utils/multer.js"
 
@@ -7,6 +7,7 @@ const router = express.Router()
 
 //static
 router.route('/create').post(isAuthenticated, createCourse)
+router.route('/search').get(isAuthenticated, searchCourse)
 router.route("/lecture/:lectureId").delete(isAuthenticated, removeLecture)
 router.route("/lecture/:lectureId").get(isAuthenticated, getLecById)
 

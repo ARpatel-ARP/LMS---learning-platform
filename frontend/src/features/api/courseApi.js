@@ -18,6 +18,17 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ["Refetch_Creator_Course", "Refetch_Lecture"],
     }),
+    getSearchCourses: builder.query({
+      query:({searchQeury, categories,sortByprice }) => {
+        let qeuryString = `/search/query=${encodeURIComponent(searchQeury)}`
+        // append category 
+        if (categories && categories.length > 0 ) {
+          const categoriesString = categories.map(encodeURIComponent).join(",") 
+          qeuryString += `&categories=${categoriesString}`
+        }
+      }
+      
+    }),
     getPublishCourse: builder.query({
       query: () => ({
         url:`/published-courses`,
