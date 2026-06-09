@@ -19,19 +19,19 @@ export const courseApi = createApi({
       invalidatesTags: ["Refetch_Creator_Course", "Refetch_Lecture"],
     }),
     getSearchCourses: builder.query({
-      query: ({ searchQeury, categories, sortByprice }) => {
-        let qeuryString = `/search/query=${encodeURIComponent(searchQeury)}`;
+      query: ({ searchQuery, categories, sortByPrice }) => {
+        let queryString = `/search?query=${encodeURIComponent(searchQuery || "")}`;
         // append category
         if (categories && categories.length > 0) {
           const categoriesString = categories.map(encodeURIComponent).join(",");
-          qeuryString += `&categories=${categoriesString}`;
+          queryString += `&categories=${categoriesString}`;
         }
         // append shortByprice
-        if (sortByprice) {
-          qeuryString += `&sortByPrice=${encodeURIComponent(sortByprice``)}`;
+        if (sortByPrice) {
+          queryString += `&sortByPrice=${encodeURIComponent(sortByPrice)}`;
         }
         return {
-          url: qeuryString,
+          url: queryString,
           method: "GET",
         };
       },
