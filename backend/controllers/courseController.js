@@ -335,6 +335,20 @@
       if (categories.length > 0) {
         searchCriteria.category = {$in: categories}
       }
+      //define sorting order
+      const sortOptions = {};
+      if (sortByPrice === "low" ) {
+        sortOptions.coursePrice = 1// sort by price in asc
+      }else if (sortByPrice === "high") {
+        sortOptions.coursePrice = -1// in desc order
+      }
+
+      let courses = await Course.find(searchCriteria).populate({path:"creator", select:"name photoUrl"}).sort(sortOptions)
+      return res.status(200).json({
+        success:true,
+        courses: courses || []
+      })
+   
     } catch (error) {
       console.log(error);
       
