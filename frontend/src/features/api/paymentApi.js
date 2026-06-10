@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const PAYMENT_API = "http://localhost:8000/api/v1/payment";
+const PAYMENT_API = `${import.meta.env.VITE_API_URL}/api/v1/payment`;
 
 export const paymentApi = createApi({
   reducerPath: "paymentApi",

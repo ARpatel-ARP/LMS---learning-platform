@@ -35,3 +35,12 @@ export const deleteVideoFromCloudinary = async (publicId) => {
         
     }
 }
+export const uploadBuffer = (buffer) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { resource_type: "auto" },
+      (error, result) => error ? reject(error) : resolve(result)
+    );
+    stream.end(buffer);
+  });
+};

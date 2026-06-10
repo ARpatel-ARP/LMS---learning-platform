@@ -130,18 +130,14 @@ const MobileNavbar = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button
-          size="icon"
-          className="rounded-full bg-gray-200 hover:bg-gray-200"
-          variant="outline"
-        >
+      <div className="items-center flex gap-x-3">
+        <DarkMode />
           <Menu />
-        </Button>
+      </div>
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-10 mx-auto p-5">
         <div className="flex gap-5 items-center">
           <SheetTitle className="font-bold text-2xl">E-Learning</SheetTitle>
-          <DarkMode />
         </div>
         <Separator className="mr-2" />
         <nav className="flex flex-col space-y-4 w-full text-xl">

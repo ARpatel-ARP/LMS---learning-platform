@@ -14,7 +14,10 @@ const HeroSection = () => {
    setSearchQuery("")
   }
   return (
-    <div className='relative bg-gradient-to-r from-cyan-100 via-cyan-800 to-cyan-100 dark:from-black dark:via-cyan-950 dark:to-black py-15 px-4 text-center'>
+    <div className='relative bg-gradient-to-r from-cyan-100 via-cyan-800 to-cyan-100
+     dark:from-black dark:via-cyan-950 dark:to-black 
+     
+     py-15 px-4 text-center'>
       <div className='max-w-3xl mx-auto'>
         <h1 className='text-white md:text-3xl text-2xl font-bold mt-10'>Find the Best Courses For You</h1>
         <p className='text-gray-200 md:text-lg text-sm dark:text-gray-400 mt-5'>Discover, Learn, and Upskill with our wide range of courses</p>

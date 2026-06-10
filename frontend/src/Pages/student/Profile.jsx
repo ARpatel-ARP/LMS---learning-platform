@@ -55,7 +55,7 @@ const Profile = () => {
 
   const { user } = data
   return (
-    <div className="max-w-4xl mx-auto px-7 my-24 w-fit md:w-full dark:bg-black  bg-gray-200 rounded-2xl p-5">
+    <div className="max-w-4xl mx-auto px-7 my-24 w-full md:dark:bg-black  md:bg-gray-200 rounded-2xl p-5">
       <h1 className="font-bold text-center md:text-left px-5 text-2xl">
         PROFILE
       </h1>
