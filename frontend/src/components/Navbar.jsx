@@ -92,9 +92,6 @@ const Navbar = () => {
               <Button variant="outline" asChild>
                 <Link to="/login">Login</Link>
               </Button>
-              <Button asChild>
-                <Link to="/signup">Signup</Link>
-              </Button>
             </div>
           )}
           <DarkMode />
@@ -142,14 +139,9 @@ const MobileNavbar = () => {
                 </Avatar>) : !isLoginPage && (
             <>
              <div className="flex items-center gap-x-2">
-               <Button variant="outline" asChild>
+               <Button asChild>
                 <SheetClose asChild>
                 <Link to="/login">Login</Link>
-            </SheetClose>
-              </Button>
-              <Button asChild>
-                <SheetClose asChild>
-                <Link to="/signup">Signup</Link>
             </SheetClose>
               </Button>
              </div>
