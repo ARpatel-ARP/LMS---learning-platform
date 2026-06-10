@@ -134,12 +134,27 @@ const MobileNavbar = () => {
       <SheetTrigger asChild>
       <div className="items-center flex gap-x-3">
          {
-          user &&  <Avatar>
+          user ? ( <Avatar>
                   <AvatarImage
                     src={user?.photoUrl}
                     alt="@shadcn"
                   />
-                </Avatar>
+                </Avatar>) : !isLoginPage && (
+            <>
+             <div className="flex items-center gap-x-2">
+               <Button variant="outline" asChild>
+                <SheetClose asChild>
+                <Link to="/login">Login</Link>
+            </SheetClose>
+              </Button>
+              <Button asChild>
+                <SheetClose asChild>
+                <Link to="/signup">Signup</Link>
+            </SheetClose>
+              </Button>
+             </div>
+            </>
+          )
         }
         <DarkMode />
       </div>
@@ -151,7 +166,7 @@ const MobileNavbar = () => {
         </div>
         <Separator className="mr-2" />
         <nav className="flex flex-col space-y-4 w-full text-xl">
-          {user ? (
+          {user && (
             // ← show these only when logged in
             <>
               <Button variant="outline" asChild>
@@ -171,20 +186,7 @@ const MobileNavbar = () => {
               </Button>
               <Button variant="outline" onClick={logoutHandler}>Log out</Button>
             </>
-          ) : !isLoginPage && (
-            <>
-              <Button variant="outline" asChild>
-                <SheetClose asChild>
-                <Link to="/login">Login</Link>
-            </SheetClose>
-              </Button>
-              <Button asChild>
-                <SheetClose asChild>
-                <Link to="/signup">Signup</Link>
-            </SheetClose>
-              </Button>
-            </>
-          )}
+          ) }
         </nav>
         {user?.role === "instructor" && (
             <Button type="submit">
