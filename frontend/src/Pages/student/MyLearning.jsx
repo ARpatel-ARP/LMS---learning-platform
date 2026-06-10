@@ -25,7 +25,7 @@ const MyLearning = ({course}) => {
 
   return (
     <div className="max-w-4xl mx-auto my-20 px-4 md:px-0">
-      <h1 className="font-bold text-2xl text-center md:text-right text-gray-900 dark:text-slate-100">
+      <h1 className="font-bold text-2xl text-right md:text-center text-gray-900 dark:text-slate-100">
         MY LEARNING
       </h1>
       <div className="my-5">
@@ -36,9 +36,7 @@ const MyLearning = ({course}) => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {myLearningCourses.map((course, i) => (
-              <Link to={`course-detail/${course._id}`}>
               <Course key={i} course={course} />
-              </Link>
             ))}
           </div>
         )}

@@ -38,8 +38,13 @@ const CourseDetail = () => {
   if (isLoading) return <div className="mt-24 text-center">Loading...</div>;
 
   return (
-    <div className="mt-24 space-y-5 ">
-      <div className="text-white bg-gradient-to-r from-cyan-700 via-cyan-100 to-white dark:from-cyan-950 dark:via-zinc-950 dark:to-zinc-950 dark:bg-cyan-950">
+    <div className="mt-15 space-y-5 ">
+      <div className="text-white 
+       md:bg-gradient-to-r md:from-cyan-800 md:via-cyan-200 md:to-white
+        md:dark:from-cyan-950 md:dark:via-zinc-950 md:dark:to-zinc-950
+        bg-gradient-to-r from-cyan-900 via-cyan-600 to-white
+        dark:from-cyan-900 dark:via-cyan-950 dark:to-zinc-950
+        ">
         <div className="max-w-7xl md:mx-22 py-8 px-4 flex flex-col gap-2">
           <h1 className="font-bold text-3xl">{course?.courseTitle}</h1>
           <p>{course?.subTitle}</p>
