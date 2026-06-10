@@ -13,6 +13,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import {
   useLoginUserMutation,
@@ -27,11 +34,13 @@ const Login = () => {
     name: "",
     email: "",
     password: "",
+    role: "student",
   });
   const [loginInput, setLoginInput] = useState({
     email: "",
     password: "",
   });
+
   const [
     registerUser,
     {
@@ -67,6 +76,7 @@ const Login = () => {
     const action = type === "signup" ? registerUser : loginUser;
     await action(inputData);
   };
+
   useEffect(() => {
     if (registerIsSuccess && registerData) {
       toast.success(registerData.message || "Signup Successful");
@@ -89,6 +99,7 @@ const Login = () => {
     loginError,
     registerError,
   ]);
+
   return (
     <div className="flex items-center w-full justify-center mt-25">
       <Tabs defaultValue="Sign up" className="w-100 shadow-2xl rounded-2xl p-2">
@@ -96,6 +107,8 @@ const Login = () => {
           <TabsTrigger value="Sign up">Sign up</TabsTrigger>
           <TabsTrigger value="Login">Login</TabsTrigger>
         </TabsList>
+
+        {/* Signup Form */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -111,7 +124,7 @@ const Login = () => {
               <CardContent>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
-                    <Label htmlFor="email">Full name</Label>
+                    <Label htmlFor="name">Full name</Label>
                     <Input
                       id="name"
                       name="name"
@@ -135,9 +148,7 @@ const Login = () => {
                     />
                   </div>
                   <div className="grid gap-2">
-                    <div className="flex items-center">
-                      <Label htmlFor="password">Create Password</Label>
-                    </div>
+                    <Label htmlFor="password">Create Password</Label>
                     <Input
                       id="password"
                       name="password"
@@ -147,12 +158,28 @@ const Login = () => {
                       required
                     />
                   </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="role">Role</Label>
+                    <Select
+                      value={signupInput.role}
+                      onValueChange={(value) =>
+                        setSignupInput({ ...signupInput, role: value })
+                      }
+                    >
+                      <SelectTrigger id="role">
+                        <SelectValue placeholder="Select your role" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="student">Student</SelectItem>
+                        <SelectItem value="instructor">Instructor</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
               </CardContent>
               <CardFooter className="flex-col gap-2">
                 <Button
                   disabled={registerLoading}
-                  onClick={() => handleRegistration("signup")}
                   type="submit"
                   className="w-full"
                 >
@@ -169,6 +196,8 @@ const Login = () => {
             </Card>
           </TabsContent>
         </form>
+
+        {/* Login Form */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -186,9 +215,9 @@ const Login = () => {
               <CardContent>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="login-email">Email</Label>
                     <Input
-                      id="email"
+                      id="login-email"
                       type="email"
                       placeholder="m@example.com"
                       onChange={(e) => changeHandler(e, "login")}
@@ -199,7 +228,7 @@ const Login = () => {
                   </div>
                   <div className="grid gap-2">
                     <div className="flex items-center">
-                      <Label htmlFor="password">Password</Label>
+                      <Label htmlFor="login-password">Password</Label>
                       <a
                         href="#"
                         className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
@@ -208,7 +237,7 @@ const Login = () => {
                       </a>
                     </div>
                     <Input
-                      id="password"
+                      id="login-password"
                       onChange={(e) => changeHandler(e, "login")}
                       name="password"
                       value={loginInput.password}
@@ -221,7 +250,6 @@ const Login = () => {
               <CardFooter className="flex-col gap-2">
                 <Button
                   disabled={loginLoading}
-                  onClick={() => handleRegistration("login")}
                   type="submit"
                   className="w-full"
                 >
