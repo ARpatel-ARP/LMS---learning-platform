@@ -190,18 +190,28 @@ const CourseTab = () => {
                     <SelectValue placeholder="Select a Category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Category</SelectLabel>
-                      <SelectItem value="Next.js">Next.js</SelectItem>
-                      <SelectItem value="Next.js">Next.js</SelectItem>
-                      <SelectItem value="Next.js">Next.js</SelectItem>
-                      <SelectItem value="AI-ML">AI-ML</SelectItem>
-                      <SelectItem value="Cloud Computing">
-                        Cloud Computing
-                      </SelectItem>
-                      <SelectItem value="React.js">React.js</SelectItem>
-                      <SelectItem value="Express.js">Express.js</SelectItem>
-                    </SelectGroup>
+                <SelectGroup>
+                <SelectLabel>Category</SelectLabel>
+                <SelectItem value="next.js">Next JS</SelectItem>
+                <SelectItem value="data science">Data Science</SelectItem>
+                <SelectItem value="frontend development">
+                  Frontend Development
+                </SelectItem>
+                <SelectItem value="fullstack development">
+                  Fullstack Development
+                </SelectItem>
+                <SelectItem value="mern stack development">
+                  MERN Stack Development
+                </SelectItem>
+                <SelectItem value="backend development">
+                  Backend Development
+                </SelectItem>
+                <SelectItem value="javascript">Javascript</SelectItem>
+                <SelectItem value="python">Python</SelectItem>
+                <SelectItem value="docker">Docker</SelectItem>
+                <SelectItem value="mongodb">MongoDB</SelectItem>
+                <SelectItem value="html">HTML</SelectItem>
+              </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>
