@@ -69,7 +69,8 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "course-detail/:courseId",
-        element: <CourseDetail />,
+        element:
+        ( <ProtectedRoute> <CourseDetail /> </ProtectedRoute>),
       },
       {
         path: "checkout/:courseId",

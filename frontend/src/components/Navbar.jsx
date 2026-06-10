@@ -102,7 +102,9 @@ const Navbar = () => {
       </div>
       {/* Phone */}
       <div className="md:hidden flex items-center justify-between p-4 ">
-        <h1 className="font-bold">E_Learning</h1>
+        <Link to="/">
+        <h1 className="font-bold">E-Learning</h1>
+        </Link>
         <MobileNavbar />
       </div>
     </div>
@@ -131,13 +133,21 @@ const MobileNavbar = () => {
     <Sheet>
       <SheetTrigger asChild>
       <div className="items-center flex gap-x-3">
+         {
+          user &&  <Avatar>
+                  <AvatarImage
+                    src={user?.photoUrl}
+                    alt="@shadcn"
+                  />
+                </Avatar>
+        }
         <DarkMode />
-          <Menu />
       </div>
       </SheetTrigger>
       <SheetContent className="flex flex-col gap-10 mx-auto p-5">
         <div className="flex gap-5 items-center">
-          <SheetTitle className="font-bold text-2xl">E-Learning</SheetTitle>
+          <SheetTitle className="font-bold text-2xl">
+            <Link to="/">E-Learning</Link></SheetTitle>
         </div>
         <Separator className="mr-2" />
         <nav className="flex flex-col space-y-4 w-full text-xl">
