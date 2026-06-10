@@ -128,8 +128,8 @@ const MobileNavbar = () => {
   }, [isSuccess])
   return (
     <Sheet>
-      <SheetTrigger asChild>
       <div className="items-center flex gap-x-3">
+      <SheetTrigger asChild>
          {
           user ? ( <Avatar>
                   <AvatarImage
@@ -148,9 +148,9 @@ const MobileNavbar = () => {
             </>
           )
         }
+      </SheetTrigger>
         <DarkMode />
       </div>
-      </SheetTrigger>
       <SheetContent className="flex flex-col gap-10 mx-auto p-5">
         <div className="flex gap-5 items-center">
           <SheetTitle className="font-bold text-2xl">
