@@ -1,7 +1,7 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
-import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
+import { deleteMediaFromCloudinary, uploadBuffer, uploadMedia } from "../utils/cloudinary.js";
 
 export const register = async (req, res) => {
   try {
@@ -130,9 +130,7 @@ export const updateProfile = async (req, res) => {
     const userId = req.id;
     const { name } = req.body;
     const profilePhoto = req.file;
-    console.log("userId:", userId);
-    console.log("name:", name);
-    console.log("profilePhoto:", profilePhoto);
+
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({
@@ -140,16 +138,26 @@ export const updateProfile = async (req, res) => {
         success: false,
       });
     }
-    // EXTRACT PUBLIC ID OF THE OLD IMAGE FROM THE URL DOES ITS EXISTS
-    if (user.photoUrl) {
-      const publicId = user.photoUrl.split("/").pop().split(".")[0]; //extract publicId
-      deleteMediaFromCloudinary(publicId);
-    }
-    // UPLOAD NEW PHOTO
-    const cloudResponse = await uploadMedia(profilePhoto.path);
-    const photoUrl = cloudResponse.secure_url;
 
-    const updateData = { name, photoUrl };
+    const updateData = {};
+
+    // only update name if provided
+    if (name && name.trim() !== "") {
+      updateData.name = name;
+    }
+
+    // only update photo if a new one was uploaded
+    if (profilePhoto) {
+      // delete old photo from cloudinary
+      if (user.photoUrl) {
+        const publicId = user.photoUrl.split("/").pop().split(".")[0];
+        await deleteMediaFromCloudinary(publicId);
+      }
+      // use buffer instead of path
+      const cloudResponse = await uploadBuffer(profilePhoto.buffer); // ✅ fixed
+      updateData.photoUrl = cloudResponse.secure_url;
+    }
+
     const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
       new: true,
     }).select("-password");
@@ -160,6 +168,7 @@ export const updateProfile = async (req, res) => {
       message: "Profile updated successfully",
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Failed to update profile",
