@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-import { toast } from "sonner"; 
+import { toast } from "sonner";
 import { useCreateCourseMutation } from "@/features/api/courseApi";
 import { Input } from "@/components/ui/input";
 
@@ -33,7 +33,7 @@ const AddCourse = () => {
       toast.error("Please enter a course title and select a category.");
       return;
     }
-  
+
     try {
       await createCourse({ courseTitle, category }).unwrap();
     } catch (err) {
@@ -44,7 +44,7 @@ const AddCourse = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success(data?.message || "Course created");
-      navigate("/admin/course"); // 
+      navigate("/admin/course"); //
     }
     if (error) {
       const msg =
@@ -87,11 +87,25 @@ const AddCourse = () => {
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Category</SelectLabel>
-                <SelectItem value="Next.js">Next.js</SelectItem>
-                <SelectItem value="AI-ML">AI-ML</SelectItem>
-                <SelectItem value="Cloud Computing">Cloud Computing</SelectItem>
-                <SelectItem value="React.js">React.js</SelectItem>
-                <SelectItem value="Express.js">Express.js</SelectItem>
+                <SelectItem value="next.js">Next JS</SelectItem>
+                <SelectItem value="data science">Data Science</SelectItem>
+                <SelectItem value="frontend development">
+                  Frontend Development
+                </SelectItem>
+                <SelectItem value="fullstack development">
+                  Fullstack Development
+                </SelectItem>
+                <SelectItem value="mern stack development">
+                  MERN Stack Development
+                </SelectItem>
+                <SelectItem value="backend development">
+                  Backend Development
+                </SelectItem>
+                <SelectItem value="javascript">Javascript</SelectItem>
+                <SelectItem value="python">Python</SelectItem>
+                <SelectItem value="docker">Docker</SelectItem>
+                <SelectItem value="mongodb">MongoDB</SelectItem>
+                <SelectItem value="html">HTML</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
