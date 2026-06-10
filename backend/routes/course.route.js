@@ -13,7 +13,7 @@ router.route("/lecture/:lectureId").get(isAuthenticated, getLecById)
 
 //dynamic 
 router.route("/").get(isAuthenticated, getCreatorCourse)
-router.route("/published-courses").get(isAuthenticated, getPublishCourse)
+router.route("/published-courses").get(getPublishCourse)
 router.route("/:courseId").put(isAuthenticated, upload.single("courseThumbnail"), updateCourse)
 router.route("/:courseId").get(isAuthenticated, getCourseById)
 router.route("/:courseId/lecture").post(isAuthenticated, createLecture)
