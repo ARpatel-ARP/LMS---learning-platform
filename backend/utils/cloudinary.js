@@ -15,6 +15,7 @@ export const uploadMedia = async (file) => {
         return uploadResponse
     } catch (error) {
         console.log(error);
+        throw error;
         
     }
 }

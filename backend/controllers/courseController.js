@@ -4,6 +4,7 @@ import { Lecture } from "../models/lecture.model.js";
 import {
   deleteMediaFromCloudinary,
   deleteVideoFromCloudinary,
+  uploadBuffer,
   uploadMedia,
 } from "../utils/cloudinary.js";
 
@@ -88,7 +89,12 @@ export const updateCourse = async (req, res) => {
       }
 
       // new thumbnail
-      const uploadResponse = await uploadMedia(thumbnail.path);
+      const uploadResponse = await uploadBuffer(thumbnail.buffer);
+      if (!uploadResponse) {
+        return res
+          .status(500)
+          .json({ message: "Failed to upload thumbnail to Cloudinary" });
+      }
       updateData.courseThumbnail = uploadResponse.secure_url;
     }
 
@@ -346,8 +352,8 @@ export const searchCourse = async (req, res) => {
 
     if (categoriesArray.length > 0) {
       searchCriteria.category = {
-    $in: categoriesArray.map((cat) => new RegExp(`^${cat}$`, "i"))
-  };
+        $in: categoriesArray.map((cat) => new RegExp(`^${cat}$`, "i")),
+      };
     }
 
     const sortOptions = {};
