@@ -68,7 +68,7 @@ const CourseProgress = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 mt-25">
+    <div className="max-w-7xl mx-auto p-4 mt-25 ">
       <div className="flex justify-between mb-5">
         <h1 className="font-bold text-2xl">{courseTitle}</h1>
         {completed ? (
@@ -85,18 +85,19 @@ const CourseProgress = () => {
 
       <div className="w-full mt-10 flex gap-x-10 flex-col md:flex-row">
         {/* Video Player */}
-        <div className="w-1/2">
-          <Card>
+        <div className="w-full md:w-1/2">
+          <Card className="">
             <CardContent>
               <video
                 src={activeLecture?.videoUrl}
+                className="w-full"
                 controls
                 onEnded={() => handleLectureProgress(activeLecture?._id)}
               />
             </CardContent>
           </Card>
-          <div className="mt-2">
-            <h3 className="font-medium text-lg">
+          <div className="mt-2 text-center md:text-left">
+            <h3 className="font-medium text-lg my-5">
               {`Lecture ${
                 courseDetail.lectures.findIndex(
                   (lec) => lec._id.toString() === activeLecture?._id?.toString()
@@ -108,8 +109,8 @@ const CourseProgress = () => {
 
         {/* Lecture Sidebar */}
         <div className="md:w-2/5 flex flex-col w-full border-t md:border-t-0 md:border-l border-gray-200 md:pl-4 pt-4 md:pt-0">
-          <h2 className="font-semibold text-xl mb-4">Course Lectures</h2>
-          <div className="flex-1 max-h-70 overflow-y-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+          <h2 className="font-semibold text-xl mb-4 text-center md:text-left">Course Lectures</h2>
+          <div className="flex-1 max-h-70 md:overflow-y-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
             {courseDetail?.lectures.map((lecture) => (
               <Card
                 key={lecture._id.toString()} 
