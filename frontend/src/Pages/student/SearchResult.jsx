@@ -16,7 +16,7 @@ const SearchResult = ({ course }) => {
         />
         <div className="flex flex-col gap-2">
             <h1 className="font-bold text-2xl">{course.courseTitle}</h1>
-            <h1 className="text-gray-200">{course?.subTitle || "subTitle : none"}</h1>
+            <h1 className="text-zinc-800 dark:text-gray-200">{course?.subTitle || "subTitle : none"}</h1>
             <p className="flex gap-1.5">
                 <span className="">Instructor :</span><span className="font-bold">{course.creator?.name}</span>
             </p>
