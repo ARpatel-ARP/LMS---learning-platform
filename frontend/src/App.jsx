@@ -1,25 +1,34 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { ThemeProvider } from "./components/ui/ThemeProvider";
-import Login from "./Pages/Login";
-import HeroSection from "./Pages/student/HeroSection";
-import MainLayout from "./layout/MainLayout";
-import Courses from "./Pages/student/Courses";
-import MyLearning from "./Pages/student/MyLearning";
-import Profile from "./Pages/student/Profile";
 import { ProtectedRoute, AdminRoute, AuthenticatedUser, PurchasedRoute } from "./components/ProtectedRoute";
-import Sidebar from "./Pages/admin/Sidebar.jsx";
-import Dashboard from "./Pages/admin/Dashboard";
-import Course from "./Pages/student/Course";
-import CourseTable from "./Pages/admin/course/CourseTable";
-import AddCourse from "./Pages/admin/course/AddCourse";
-import EditCourse from "./Pages/admin/course/EditCourse";
-import CreateLecture from "./Pages/admin/lectures/CreateLecture";
-import UpdateLecture from "./Pages/admin/lectures/UpdateLecture";
-import CourseDetail from "./Pages/student/CourseDetail";
-import CheckoutPage from "./components/checkout/CheckoutPage";
-import CourseProgress from "./Pages/student/CourseProgress";
-import SearchPage from "./Pages/student/SearchPage";
+import MainLayout from "./layout/MainLayout";
+import HeroSection from "./Pages/student/HeroSection";
+import Courses from "./Pages/student/Courses";
+
+const Login = lazy(() => import("./Pages/Login"));
+const MyLearning = lazy(() => import("./Pages/student/MyLearning"));
+const Profile = lazy(() => import("./Pages/student/Profile"));
+const Course = lazy(() => import("./Pages/student/Course"));
+const CourseDetail = lazy(() => import("./Pages/student/CourseDetail"));
+const CourseProgress = lazy(() => import("./Pages/student/CourseProgress"));
+const SearchPage = lazy(() => import("./Pages/student/SearchPage"));
+const CheckoutPage = lazy(() => import("./components/checkout/CheckoutPage"));
+
+const Sidebar = lazy(() => import("./Pages/admin/Sidebar.jsx"));
+const Dashboard = lazy(() => import("./Pages/admin/Dashboard"));
+const CourseTable = lazy(() => import("./Pages/admin/course/CourseTable"));
+const AddCourse = lazy(() => import("./Pages/admin/course/AddCourse"));
+const EditCourse = lazy(() => import("./Pages/admin/course/EditCourse"));
+const CreateLecture = lazy(() => import("./Pages/admin/lectures/CreateLecture"));
+const UpdateLecture = lazy(() => import("./Pages/admin/lectures/UpdateLecture"));
+
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-[60vh]">
+    <div className="w-8 h-8 border-2 border-[#c9a84c]/30 border-t-[#c9a84c] rounded-full animate-spin"></div>
+  </div>
+);
 
 const appRouter = createBrowserRouter([
   {
@@ -69,8 +78,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "course-detail/:courseId",
-        element:
-        ( <ProtectedRoute> <CourseDetail /> </ProtectedRoute>),
+        element: <CourseDetail />,
       },
       {
         path: "checkout/:courseId",
@@ -85,13 +93,11 @@ const appRouter = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <PurchasedRoute>
-            <CourseProgress />
-          </PurchasedRoute>
+              <CourseProgress />
+            </PurchasedRoute>
           </ProtectedRoute>
         ),
       },
-
-      // admin routes
       {
         path: "admin",
         element: (
@@ -100,30 +106,12 @@ const appRouter = createBrowserRouter([
           </AdminRoute>
         ),
         children: [
-          {
-            path: "dashboard",
-            element: <Dashboard />,  // AdminRoute on parent already protects this
-          },
-          {
-            path: "course",
-            element: <CourseTable />,
-          },
-          {
-            path: "course/create",
-            element: <AddCourse />,
-          },
-          {
-            path: "course/:courseId",
-            element: <EditCourse />,
-          },
-          {
-            path: "course/:courseId/lecture",
-            element: <CreateLecture />,
-          },
-          {
-            path: "course/:courseId/lecture/:lectureId",
-            element: <UpdateLecture />,
-          },
+          { path: "dashboard", element: <Dashboard /> },
+          { path: "course", element: <CourseTable /> },
+          { path: "course/create", element: <AddCourse /> },
+          { path: "course/:courseId", element: <EditCourse /> },
+          { path: "course/:courseId/lecture", element: <CreateLecture /> },
+          { path: "course/:courseId/lecture/:lectureId", element: <UpdateLecture /> },
         ],
       },
     ],
@@ -134,7 +122,9 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <main>
-        <RouterProvider router={appRouter} />
+        <Suspense fallback={<PageLoader />}>
+          <RouterProvider router={appRouter} />
+        </Suspense>
       </main>
     </ThemeProvider>
   );
