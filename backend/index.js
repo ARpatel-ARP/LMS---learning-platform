@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import paymentRoute from "./routes/payment.route.js" 
 import progressRoute from "./routes/courseProgress.route.js"
 import cors from "cors"
+import compression from 'compression';
 dotenv.config()
 
 const app = express()
@@ -19,6 +20,7 @@ app.use(cors({
   origin: process.env.CLIENT_URL, 
   credentials: true
 }))
+app.use(compression())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())

@@ -48,5 +48,9 @@ const CourseSchema = mongoose.Schema({
         default:false
     }
 }, {timestamps:true})
+CourseSchema.index({ isPublished: 1 });
+CourseSchema.index({ category: 1 });
+CourseSchema.index({ creator: 1 });
+CourseSchema.index({ courseTitle: "text", subTitle: "text" });
 
 export const Course = mongoose.model("Course", CourseSchema)
